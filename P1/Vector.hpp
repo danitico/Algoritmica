@@ -3,16 +3,21 @@
 #include <vector>
 class Vector{
    private:
-      std::vector<int> datos_;
-      int tamano_;
-
+      std::vector<int> v_;
+      int partition(int primero, int ultimo);
    public:
       Vector(int tamano){
-         datos_.resize(tamano);
+         v_.resize(tamano);
       }
-      void borrarElementos();
+      inline void cambiarTamano(int tamano){
+         v_.resize(tamano);
+      }
+      inline void borrarElementos(){
+         v_.clear();
+      }
       void rellenarVector();
-      bool estaOrdenado();
+      bool estaOrdenado() const;
       void ordenacionSacudida();
+      void quicksort(int primero, int ultimo);
 };
 #endif
