@@ -6,7 +6,7 @@ class Vector{
       std::vector<int> v_;
       int partition(int primero, int ultimo);
    public:
-      Vector(int tamano){
+      Vector(int tamano=0){
          v_.resize(tamano);
       }
       inline void cambiarTamano(int tamano){
