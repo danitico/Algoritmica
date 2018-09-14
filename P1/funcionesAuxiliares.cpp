@@ -1,14 +1,17 @@
 #include "funcionesAuxiliares.hpp"
 #include "Vector.hpp"
 #include "Tiempo.hpp"
+#include <cassert>
 #include <vector>
 #include <iostream>
 void obtenerDatosDeSacudida(){
    std::vector<int> n;
    std::vector<uint64_t> t;
+
    Vector a;
    Clock reloj;
    int minimo=0, maximo=0, incremento=0, repeticion=0;
+
    std::cout << "Introduzca el mínimo de numero de elementos: ";
    std::cin >> minimo;
 
@@ -28,28 +31,29 @@ void obtenerDatosDeSacudida(){
       n.push_back(i);
       a.cambiarTamano(i);
       a.rellenarVector();
-      // std::cout<<"i -> "<<i<<std::endl;
-      // std::cout << "-------------" << '\n';
       for(int j=0; j<repeticion; j++){
          reloj.start();
          a.ordenacionSacudida();
-
          reloj.stop();
-         std::cout << reloj.elapsed() << '\n';
+         assert(a.estaOrdenado());
+
          sumatorio+=reloj.elapsed();
          a.rellenarVector();
       }
       sumatorio=sumatorio/repeticion;
-      std::cout << i << " -> " << sumatorio << '\n';
+      t.push_back(sumatorio);
       a.borrarElementos();
    }
+   imprimirDatos(n, t);
 }
 void obtenerDatosDeQuicksort(){
    std::vector<int> n;
    std::vector<uint64_t> t;
+
    Vector a;
    Clock reloj;
    int minimo=0, maximo=0, incremento=0, repeticion=0;
+
    std::cout << "Introduzca el mínimo de numero de elementos: ";
    std::cin >> minimo;
 
@@ -69,19 +73,26 @@ void obtenerDatosDeQuicksort(){
       n.push_back(i);
       a.cambiarTamano(i);
       a.rellenarVector();
-      // std::cout<<"i -> "<<i<<std::endl;
-      // std::cout << "-------------" << '\n';
+
       for(int j=0; j<repeticion; j++){
          reloj.start();
          a.quicksort(0, i);
-
          reloj.stop();
-         // std::cout << reloj.elapsed() << '\n';
+         assert(a.estaOrdenado());
+         
          sumatorio+=reloj.elapsed();
          a.rellenarVector();
       }
       sumatorio=sumatorio/repeticion;
-      std::cout << i << " -> " << sumatorio << '\n';
+      t.push_back(sumatorio);
       a.borrarElementos();
+   }
+   imprimirDatos(n, t);
+}
+void imprimirDatos(std::vector<int> const &n, std::vector<uint64_t> &t){
+   std::cout << "Elementos\tTiempo" << '\n';
+   std::cout << "----------------------" << '\n';
+   for(int i=0; i<n.size(); i++){
+      std::cout << n[i] << "\t\t" << t[i] <<'\n';
    }
 }
