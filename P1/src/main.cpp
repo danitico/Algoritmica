@@ -8,6 +8,7 @@ int main(){
    srand(time(NULL));
    int opcion=0;
    do {
+      std::cout << std::endl;
       std::cout << "\t Menu" << '\n';
       std::cout << "------------------------" << '\n';
       std::cout << "1. Método de la sacudida" << std::endl;

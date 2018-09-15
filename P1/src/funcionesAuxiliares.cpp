@@ -25,28 +25,32 @@ void obtenerDatosDeSacudida(){
    std::cout << "Introduzca el número de repeticiones: ";
    std::cin >> repeticion;
 
-   uint64_t sumatorio;
-
-   for(int i=minimo; i<=maximo; i+=incremento){
-      sumatorio=0;
-      n.push_back(i);
-      a.cambiarTamano(i);
-      a.rellenarVector();
-      for(int j=0; j<repeticion; j++){
-         reloj.start();
-         a.ordenacionSacudida();
-         reloj.stop();
-         assert(a.estaOrdenado());
-
-         sumatorio+=reloj.elapsed();
+   if(minimo <= maximo){
+      uint64_t sumatorio;
+      for(int i=minimo; i<=maximo; i+=incremento){
+         sumatorio=0;
+         n.push_back(i);
+         a.cambiarTamano(i);
          a.rellenarVector();
+         for(int j=0; j<repeticion; j++){
+            reloj.start();
+            a.ordenacionSacudida();
+            reloj.stop();
+            assert(a.estaOrdenado());
+
+            sumatorio+=reloj.elapsed();
+            a.rellenarVector();
+         }
+         sumatorio=sumatorio/repeticion;
+         t.push_back(sumatorio);
+         a.borrarElementos();
       }
-      sumatorio=sumatorio/repeticion;
-      t.push_back(sumatorio);
-      a.borrarElementos();
+      guardarDatos(n, t, "sacudida.txt");
+      std::cout << "Ordenación terminada" << '\n';
    }
-   guardarDatos(n, t);
-   // imprimirDatos(n, t);
+   else{
+      std::cout << "Se han introducido datos inconsistentes" << '\n';
+   }
 }
 void obtenerDatosDeQuicksort(){
    std::vector<int> n;
@@ -68,39 +72,43 @@ void obtenerDatosDeQuicksort(){
    std::cout << "Introduzca el número de repeticiones: ";
    std::cin >> repeticion;
 
-   uint64_t sumatorio;
-
-   for(int i=minimo; i<=maximo; i+=incremento){
-      sumatorio=0;
-      n.push_back(i);
-      a.cambiarTamano(i);
-      a.rellenarVector();
-
-      for(int j=0; j<repeticion; j++){
-         reloj.start();
-         a.quicksort(0, i);
-         reloj.stop();
-         assert(a.estaOrdenado());
-
-         sumatorio+=reloj.elapsed();
+   if(minimo <= maximo){
+      uint64_t sumatorio;
+      for(int i=minimo; i<=maximo; i+=incremento){
+         sumatorio=0;
+         n.push_back(i);
+         a.cambiarTamano(i);
          a.rellenarVector();
+
+         for(int j=0; j<repeticion; j++){
+            reloj.start();
+            a.quicksort(0, i);
+            reloj.stop();
+            assert(a.estaOrdenado());
+
+            sumatorio+=reloj.elapsed();
+            a.rellenarVector();
+         }
+         sumatorio=sumatorio/repeticion;
+         t.push_back(sumatorio);
+         a.borrarElementos();
       }
-      sumatorio=sumatorio/repeticion;
-      t.push_back(sumatorio);
-      a.borrarElementos();
+      guardarDatos(n, t, "quicksort.txt");
+      std::cout << "ordenación terminada" << '\n';
    }
-   guardarDatos(n, t);
-   // imprimirDatos(n, t);
-}
-void imprimirDatos(std::vector<int> const &n, std::vector<uint64_t> const &t){
-   std::cout << "Elementos\tTiempo" << '\n';
-   std::cout << "----------------------" << '\n';
-   for(int i=0; i<n.size(); i++){
-      std::cout << n[i] << "\t\t" << t[i] <<'\n';
+   else{
+      std::cout << "Se han introducido datos inconsistentes" << '\n';
    }
 }
-void guardarDatos(std::vector<int> const &n, std::vector<uint64_t> const &t){
-   std::ofstream file("Datos.txt");
+// void imprimirDatos(std::vector<int> const &n, std::vector<uint64_t> const &t){
+//    std::cout << "Elementos\tTiempo" << '\n';
+//    std::cout << "----------------------" << '\n';
+//    for(int i=0; i<n.size(); i++){
+//       std::cout << n[i] << "\t\t" << t[i] <<'\n';
+//    }
+// }
+void guardarDatos(std::vector<int> const &n, std::vector<uint64_t> const &t, std::string fichero){
+   std::ofstream file(fichero);
    if(file.is_open()){
       for(int i=0; i<n.size(); i++){
          file<<n[i]<<" "<<t[i]<<std::endl;
