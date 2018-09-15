@@ -108,7 +108,7 @@ void obtenerDatosDeQuicksort(){
 //    }
 // }
 void guardarDatos(std::vector<int> const &n, std::vector<uint64_t> const &t, std::string fichero){
-   std::ofstream file(fichero);
+   std::ofstream file(fichero.c_str());
    if(file.is_open()){
       for(int i=0; i<n.size(); i++){
          file<<n[i]<<" "<<t[i]<<std::endl;
