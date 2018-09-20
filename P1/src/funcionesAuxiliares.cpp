@@ -5,9 +5,10 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <cmath>
 void obtenerDatosDeSacudida(){
-   std::vector<int> n;
-   std::vector<uint64_t> t;
+   std::vector<double> n;
+   std::vector<double> t;
 
    Vector a;
    Clock reloj;
@@ -26,7 +27,7 @@ void obtenerDatosDeSacudida(){
    std::cin >> repeticion;
 
    if(minimo <= maximo){
-      uint64_t sumatorio;
+      double sumatorio;
       for(int i=minimo; i<=maximo; i+=incremento){
          sumatorio=0;
          n.push_back(i);
@@ -53,8 +54,8 @@ void obtenerDatosDeSacudida(){
    }
 }
 void obtenerDatosDeQuicksort(){
-   std::vector<int> n;
-   std::vector<uint64_t> t;
+   std::vector<double> n;
+   std::vector<double> t;
 
    Vector a;
    Clock reloj;
@@ -73,7 +74,7 @@ void obtenerDatosDeQuicksort(){
    std::cin >> repeticion;
 
    if(minimo <= maximo){
-      uint64_t sumatorio;
+      double sumatorio;
       for(int i=minimo; i<=maximo; i+=incremento){
          sumatorio=0;
          n.push_back(i);
@@ -107,7 +108,7 @@ void obtenerDatosDeQuicksort(){
 //       std::cout << n[i] << "\t\t" << t[i] <<'\n';
 //    }
 // }
-void guardarDatos(std::vector<int> const &n, std::vector<uint64_t> const &t, std::string fichero){
+void guardarDatos(std::vector<double> const &n, std::vector<double> const &t, std::string fichero){
    std::ofstream file(fichero.c_str());
    if(file.is_open()){
       for(int i=0; i<n.size(); i++){
@@ -115,4 +116,24 @@ void guardarDatos(std::vector<int> const &n, std::vector<uint64_t> const &t, std
       }
       file.close();
    }
+}
+void ajusteDatosnoSofisticado(){
+   std::vector<std::vector<double> > A;
+   v.resize(3, 0);
+   v[0].resize(3,0);
+   v[1].resize(3,0);
+   v[2].resize(3,0);
+
+   for(int i=0; i<3; i++){
+      for(int j=0; j<3; j++){
+         
+      }
+   }
+}
+double sumatorio(std::vector<double> n, std::vector<double> t, int a, int b){
+   double sumatorio=0.0;
+   for(int i=0; i<n.size(); i++){
+      sumatorio+=pow(n[i], a)*pow(t[i], b);
+   }
+   return sumatorio;
 }
