@@ -151,7 +151,7 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    }
    media1=media1/(float)tiempoestimado.size();
    double acumulado1=0.0;
-   int j=0;
+   j=0;
    for(; j<tiempoestimado.size(); j++){
       acumulado1+=pow((tiempoestimado[i]-media1), 2);
    }
