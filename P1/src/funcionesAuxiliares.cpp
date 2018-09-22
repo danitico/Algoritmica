@@ -47,8 +47,9 @@ void obtenerDatosDeSacudida(){
          t.push_back(sumatorio);
          a.borrarElementos();
       }
-      guardarDatos(n, t, "sacudida.txt");
       std::cout << "Ordenación terminada" << '\n';
+
+      ajusteDatosnoSofisticado(n, t);
    }
    else{
       std::cout << "Se han introducido datos inconsistentes" << '\n';
@@ -95,10 +96,8 @@ void obtenerDatosDeQuicksort(){
          t.push_back(sumatorio);
          a.borrarElementos();
       }
-      guardarDatos(n, t, "quicksort.txt");
+      // guardarDatos(n, t, "quicksort.txt");
       std::cout << "ordenación terminada" << '\n';
-
-      ajusteDatosnoSofisticado(n, t);
    }
    else{
       std::cout << "Se han introducido datos inconsistentes" << '\n';
@@ -111,11 +110,11 @@ void obtenerDatosDeQuicksort(){
 //       std::cout << n[i] << "\t\t" << t[i] <<'\n';
 //    }
 // }
-void guardarDatos(std::vector<double> const &n, std::vector<double> const &t, std::string fichero){
+void guardarDatos(std::vector<double> const &n, std::vector<double> const &t, std::vector<double> const & tiempoestimado,std::string fichero){
    std::ofstream file(fichero.c_str());
    if(file.is_open()){
       for(int i=0; i<n.size(); i++){
-         file<<n[i]<<" "<<t[i]<<std::endl;
+         file<<n[i]<<" "<<t[i]<<" "<<tiempoestimado[i]<<std::endl;
       }
       file.close();
    }
@@ -140,9 +139,14 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    std::vector<std::vector<double> > X(3, std::vector<double>(1,0));
 
    resolverSistemaEcuaciones(A, B, 3, X);
-   for(int i=0; i<3; i++){
-      std::cout << X[i][0] << '\n';
+   // for(int i=0; i<3; i++){
+   //    std::cout << X[i][0] << '\n';
+   // }
+   std::vector<double> tiempoestimado(n.size(), 0);
+   for(int i=0; i<tiempoestimado.size(); i++){
+      tiempoestimado[i]=X[0]+X[1]*n[i]+pow(n[i],2)*X[2];
    }
+   guardarDatos(n, t, tiempoestimado, "sacudida.txt");
 }
 double sumatorio(std::vector<double> n, std::vector<double> t, int a, int b){
    double sumatorio=0.0;
