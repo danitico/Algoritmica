@@ -142,10 +142,31 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    // for(int i=0; i<3; i++){
    //    std::cout << X[i][0] << '\n';
    // }
+   double media1=0.0;
    std::vector<double> tiempoestimado(n.size(), 0);
    for(int i=0; i<tiempoestimado.size(); i++){
       tiempoestimado[i]=X[0][0]+X[1][0]*n[i]+pow(n[i],2)*X[2][0];
+      media1+=tiempoestimado[i];
    }
+   media1=media1/(float)tiempoestimado.size();
+   double acumulado1=0.0;
+   for(int j=0; j<tiempoestimado.size(); j++){
+      acumulado1+=pow((tiempoestimado[i]-media1), 2);
+   }
+   acumulado1=acumulado1/(float)tiempoestimado.size();
+
+   double media2=0.0;
+   for(int k=0; k<t.size(); k++){
+      media2+=t[k];
+   }
+   media2=media2/(float)t.size();
+   double acumulado2=0.0;
+   for(int j=0; j<t.size(); j++){
+      acumulado1+=pow((t[i]-media2), 2);
+   }
+   acumulado2=acumulado2/(float)t.size();
+   std::cout << "coeficiente determinacion" << acumulado1/acumulado2 << '\n';
+
    guardarDatos(n, t, tiempoestimado, "sacudida.txt");
 }
 double sumatorio(std::vector<double> n, std::vector<double> t, int a, int b){
