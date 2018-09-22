@@ -144,7 +144,7 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    // }
    std::vector<double> tiempoestimado(n.size(), 0);
    for(int i=0; i<tiempoestimado.size(); i++){
-      tiempoestimado[i]=X[0]+X[1]*n[i]+pow(n[i],2)*X[2];
+      tiempoestimado[i]=X[0][0]+X[1][0]*n[i]+pow(n[i],2)*X[2][0];
    }
    guardarDatos(n, t, tiempoestimado, "sacudida.txt");
 }
