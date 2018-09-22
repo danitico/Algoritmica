@@ -1,6 +1,7 @@
 #include "funcionesAuxiliares.hpp"
 #include "Vector.hpp"
 #include "Tiempo.hpp"
+#include "sistemaEcuaciones.hpp"
 #include <cassert>
 #include <vector>
 #include <iostream>
@@ -96,6 +97,8 @@ void obtenerDatosDeQuicksort(){
       }
       guardarDatos(n, t, "quicksort.txt");
       std::cout << "ordenación terminada" << '\n';
+
+      ajusteDatosnoSofisticado(n, t);
    }
    else{
       std::cout << "Se han introducido datos inconsistentes" << '\n';
@@ -117,17 +120,28 @@ void guardarDatos(std::vector<double> const &n, std::vector<double> const &t, st
       file.close();
    }
 }
-void ajusteDatosnoSofisticado(){
-   std::vector<std::vector<double> > A;
-   v.resize(3, 0);
-   v[0].resize(3,0);
-   v[1].resize(3,0);
-   v[2].resize(3,0);
+void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
+   std::vector<std::vector<double> > A(3, std::vector<double>(3,0));
 
+   A[0][0]=t.size();
    for(int i=0; i<3; i++){
       for(int j=0; j<3; j++){
-         
+         if(i!=0 && j!=0){
+            A[i][j]=sumatorio(n, t, i+j, 0);
+         }
       }
+   }
+
+   std::vector<std::vector<double> > B(3, std::vector<double>(1,0));
+   B[0][0]=sumatorio(n, t, 0, 1);
+   B[1][0]=sumatorio(n, t, 1, 1);
+   B[2][0]=sumatorio(n, t, 2, 1);
+
+   std::vector<std::vector<double> > X(3, std::vector<double>(1,0));
+
+   resolverSistemaEcuaciones(A, B, 3, X);
+   for(int i=0; i<3; i++){
+      std::cout << X[i][0] << '\n';
    }
 }
 double sumatorio(std::vector<double> n, std::vector<double> t, int a, int b){
