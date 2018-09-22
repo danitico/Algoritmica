@@ -123,8 +123,9 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    std::vector<std::vector<double> > A(3, std::vector<double>(3,0));
 
    A[0][0]=t.size();
-   for(int i=0; i<3; i++){
-      for(int j=0; j<3; j++){
+   int i=0, j=0;
+   for(; i<3; i++){
+      for(; j<3; j++){
          if(i!=0 && j!=0){
             A[i][j]=sumatorio(n, t, i+j, 0);
          }
@@ -150,7 +151,8 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    }
    media1=media1/(float)tiempoestimado.size();
    double acumulado1=0.0;
-   for(int j=0; j<tiempoestimado.size(); j++){
+   int j=0;
+   for(; j<tiempoestimado.size(); j++){
       acumulado1+=pow((tiempoestimado[i]-media1), 2);
    }
    acumulado1=acumulado1/(float)tiempoestimado.size();
