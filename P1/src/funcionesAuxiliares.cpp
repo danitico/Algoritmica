@@ -154,20 +154,25 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
       acumulado1+=pow((tiempoestimado[j]-media1), 2);
    }
    acumulado1=acumulado1/(double)tiempoestimado.size();
-   std::cout << "acumulado1: " << acumulado1 <<'\n';
+   acumulado1=sqrt(acumulado1);
 
    double media2=0.0;
    for(int k=0; k<t.size(); k++){
       media2+=t[k];
    }
+
    media2=media2/(double)t.size();
    double acumulado2=0.0;
+
    for(int j=0; j<t.size(); j++){
       acumulado2+=pow((t[j]-media2), 2);
    }
+
    acumulado2=acumulado2/(double)t.size();
-   std::cout << "acumulado2: " << acumulado2 <<'\n';
-   double coeficiente=acumulado1/acumulado2;
+   acumulado2=sqrt(acumulado2);
+
+   double coeficiente=((sumatorio(t, tiempoestimado, 1, 1)/n.size())-(media1*media2))/(acumulado1*acumulado2);
+   coeficiente=pow(coeficiente, 2);
    std::cout << "coeficiente determinacion: " << coeficiente << '\n';
 
    guardarDatos(n, t, tiempoestimado, "sacudida.txt");
@@ -203,13 +208,13 @@ void ajusteDatosSofisticado(std::vector<double> n, std::vector<double> t){
       tiempoestimado[i]=X[0][0] + (X[1][0]*n[i]*log10(n[i]));
       media1+=tiempoestimado[i];
    }
-   media1=media1/(double)tiempoestimado.size();
+   media1=media1/tiempoestimado.size();
 
    for(int j=0; j<tiempoestimado.size(); j++){
       acumulado1+=pow((tiempoestimado[j]-media1), 2);
    }
-   acumulado1=acumulado1/(double)tiempoestimado.size();
-   std::cout << "acumulado1: " << acumulado1 <<'\n';
+   acumulado1=acumulado1/tiempoestimado.size();
+   acumulado1=sqrt(acumulado1);
 
    double media2=0.0;
    double acumulado2=0.0;
@@ -217,14 +222,16 @@ void ajusteDatosSofisticado(std::vector<double> n, std::vector<double> t){
    for(int k=0; k<t.size(); k++){
       media2+=t[k];
    }
-   media2=media2/(double)t.size();
+   media2=media2/t.size();
 
    for(int j=0; j<t.size(); j++){
       acumulado2+=pow((t[j]-media2), 2);
    }
-   acumulado2=acumulado2/(double)t.size();
-   std::cout << "acumulado2: " << acumulado2 <<'\n';
-   double coeficiente=acumulado1/acumulado2;
+   acumulado2=acumulado2/t.size();
+   acumulado2=sqrt(acumulado2);
+   double coeficiente=((sumatorio(t, tiempoestimado, 1, 1)/n.size())-(media1*media2))/(acumulado1*acumulado2);
+   coeficiente=pow(coeficiente,2);
+
    std::cout << "coeficiente determinacion: " << coeficiente << '\n';
 
    guardarDatos(n, t, tiempoestimado, "quicksort.txt");
