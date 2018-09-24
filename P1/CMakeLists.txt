@@ -6,4 +6,4 @@ add_executable(ordenacion.exe ${PROJECT_SOURCE_DIR}main.cpp
 ${PROJECT_SOURCE_DIR}funcionesAuxiliares.cpp
 ${PROJECT_SOURCE_DIR}Tiempo.cpp
 ${PROJECT_SOURCE_DIR}Vector.cpp
-${PROJECT_SOURCE_DIR}sistemaEcuacionesUbuntu64.o)
+${PROJECT_SOURCE_DIR}sistemaEcuaciones.cpp)

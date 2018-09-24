@@ -47,10 +47,10 @@ void obtenerDatosDeSacudida(){
          t.push_back(sumatorio);
          a.borrarElementos();
       }
-      std::cout << "Ordenación terminada" << '\n';
+      // std::cout << "Ordenación terminada" << '\n';
 
       ajusteDatosnoSofisticado(n, t);
-   }
+}
    else{
       std::cout << "Se han introducido datos inconsistentes" << '\n';
    }
@@ -123,9 +123,8 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    std::vector<std::vector<double> > A(3, std::vector<double>(3,0));
 
    A[0][0]=t.size();
-   int i=0, j=0;
-   for(; i<3; i++){
-      for(; j<3; j++){
+   for(int i=0; i<3; i++){
+      for(int j=0; j<3; j++){
          if(i!=0 && j!=0){
             A[i][j]=sumatorio(n, t, i+j, 0);
          }
@@ -140,34 +139,37 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    std::vector<std::vector<double> > X(3, std::vector<double>(1,0));
 
    resolverSistemaEcuaciones(A, B, 3, X);
-   // for(int i=0; i<3; i++){
-   //    std::cout << X[i][0] << '\n';
-   // }
+   for(int i=0; i<3; i++){
+      std::cout << X[i][0] << '\n';
+   }
    double media1=0.0;
    std::vector<double> tiempoestimado(n.size(), 0);
    for(int i=0; i<tiempoestimado.size(); i++){
       tiempoestimado[i]=X[0][0]+X[1][0]*n[i]+pow(n[i],2)*X[2][0];
       media1+=tiempoestimado[i];
    }
-   media1=media1/(float)tiempoestimado.size();
+   media1=media1/(double)tiempoestimado.size();
    double acumulado1=0.0;
-   j=0;
-   for(; j<tiempoestimado.size(); j++){
-      acumulado1+=pow((tiempoestimado[i]-media1), 2);
+
+   for(int j=0; j<tiempoestimado.size(); j++){
+      acumulado1+=pow((tiempoestimado[j]-media1), 2);
    }
-   acumulado1=acumulado1/(float)tiempoestimado.size();
+   acumulado1=acumulado1/(double)tiempoestimado.size();
+   std::cout << "acumulado1: " << acumulado1 <<'\n';
 
    double media2=0.0;
    for(int k=0; k<t.size(); k++){
       media2+=t[k];
    }
-   media2=media2/(float)t.size();
+   media2=media2/(double)t.size();
    double acumulado2=0.0;
    for(int j=0; j<t.size(); j++){
-      acumulado1+=pow((t[i]-media2), 2);
+      acumulado2+=pow((t[j]-media2), 2);
    }
-   acumulado2=acumulado2/(float)t.size();
-   std::cout << "coeficiente determinacion" << acumulado1/acumulado2 << '\n';
+   acumulado2=acumulado2/(double)t.size();
+   std::cout << "acumulado2: " << acumulado2 <<'\n';
+   double coeficiente=acumulado1/acumulado2;
+   std::cout << "coeficiente determinacion: " << coeficiente << '\n';
 
    guardarDatos(n, t, tiempoestimado, "sacudida.txt");
 }
