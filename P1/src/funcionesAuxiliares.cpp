@@ -200,8 +200,7 @@ void ajusteDatosSofisticado(std::vector<double> n, std::vector<double> t){
 
    std::vector<double> tiempoestimado(n.size(), 0);
    for(int i=0; i<tiempoestimado.size(); i++){
-      tiempoestimado[i]=X[0][0] + (X[1][0]*n[i]*log(n[i]));
-      std::cout << "pipo: " << tiempoestimado[i] <<'\n';
+      tiempoestimado[i]=X[0][0] + (X[1][0]*n[i]*log10(n[i]));
       media1+=tiempoestimado[i];
    }
    media1=media1/(double)tiempoestimado.size();
