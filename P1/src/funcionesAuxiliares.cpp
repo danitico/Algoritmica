@@ -47,9 +47,8 @@ void obtenerDatosDeSacudida(){
          t.push_back(sumatorio);
          a.borrarElementos();
       }
-      // std::cout << "Ordenación terminada" << '\n';
-
       ajusteDatosnoSofisticado(n, t);
+      std::cout << "Ordenación terminada" << '\n';
 }
    else{
       std::cout << "Se han introducido datos inconsistentes" << '\n';
@@ -96,7 +95,7 @@ void obtenerDatosDeQuicksort(){
          t.push_back(sumatorio);
          a.borrarElementos();
       }
-      // guardarDatos(n, t, "quicksort.txt");
+      ajusteDatosSofisticado(n, t);
       std::cout << "ordenación terminada" << '\n';
    }
    else{
@@ -172,6 +171,64 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    std::cout << "coeficiente determinacion: " << coeficiente << '\n';
 
    guardarDatos(n, t, tiempoestimado, "sacudida.txt");
+}
+void ajusteDatosSofisticado(std::vector<double> n, std::vector<double> t){
+   std::vector<std::vector<double> > A(2, std::vector<double>(2,0));
+
+   A[0][0]=t.size();
+   for(int i=0; i<2; i++){
+      for(int j=0; j<2; j++){
+         if(i!=0 && j!=0){
+            A[i][j]=sumatorio(n, t, i+j, 0);
+         }
+      }
+   }
+
+   std::vector<std::vector<double> > B(2, std::vector<double>(1,0));
+   B[0][0]=sumatorio(n, t, 0, 1);
+   B[1][0]=sumatorio(n, t, 1, 1);
+
+   std::vector<std::vector<double> > X(2, std::vector<double>(1,0));
+
+   resolverSistemaEcuaciones(A, B, 2, X);
+   for(int i=0; i<2; i++){
+      std::cout << X[i][0] << '\n';
+   }
+
+   double media1=0.0;
+   double acumulado1=0.0;
+
+   std::vector<double> tiempoestimado(n.size(), 0);
+   for(int i=0; i<tiempoestimado.size(); i++){
+      tiempoestimado[i]=X[0][0] + (X[1][0]*n[i]*log(n[i]));
+      std::cout << "pipo: " << tiempoestimado[i] <<'\n';
+      media1+=tiempoestimado[i];
+   }
+   media1=media1/(double)tiempoestimado.size();
+
+   for(int j=0; j<tiempoestimado.size(); j++){
+      acumulado1+=pow((tiempoestimado[j]-media1), 2);
+   }
+   acumulado1=acumulado1/(double)tiempoestimado.size();
+   std::cout << "acumulado1: " << acumulado1 <<'\n';
+
+   double media2=0.0;
+   double acumulado2=0.0;
+
+   for(int k=0; k<t.size(); k++){
+      media2+=t[k];
+   }
+   media2=media2/(double)t.size();
+
+   for(int j=0; j<t.size(); j++){
+      acumulado2+=pow((t[j]-media2), 2);
+   }
+   acumulado2=acumulado2/(double)t.size();
+   std::cout << "acumulado2: " << acumulado2 <<'\n';
+   double coeficiente=acumulado1/acumulado2;
+   std::cout << "coeficiente determinacion: " << coeficiente << '\n';
+
+   guardarDatos(n, t, tiempoestimado, "quicksort.txt");
 }
 double sumatorio(std::vector<double> n, std::vector<double> t, int a, int b){
    double sumatorio=0.0;
