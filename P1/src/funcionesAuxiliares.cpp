@@ -169,9 +169,11 @@ void ajusteDatosSofisticado(std::vector<double> n, std::vector<double> t){
       for(int j=0; j<2; j++){
          if(i==0 && j==0){
             A[0][0]=t.size();
+            std::cout << "elemento 0: " << A[0][0] << '\n';
          }
          else{
             A[i][j]=sumatorio(n, t, i+j, 0);
+            cout<<"i:j : "<<A[i][j]<<std::endl;
          }
       }
    }
@@ -189,7 +191,7 @@ void ajusteDatosSofisticado(std::vector<double> n, std::vector<double> t){
 
    std::vector<double> tiempoestimado(n.size(), 0);
    for(int i=0; i<tiempoestimado.size(); i++){
-      tiempoestimado[i]=X[0][0] + (X[1][0]*n[i]*log10(n[i]));
+      tiempoestimado[i]=X[0][0] + (X[1][0]*n[i]/*log10(n[i])*/);
       media1+=tiempoestimado[i];
    }
    media1=media1/tiempoestimado.size();
