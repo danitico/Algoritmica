@@ -105,10 +105,12 @@ void obtenerDatosDeQuicksort(){
 void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    std::vector<std::vector<double> > A(3, std::vector<double>(3,0));
 
-   A[0][0]=t.size();
    for(int i=0; i<3; i++){
       for(int j=0; j<3; j++){
-         if(i!=0 && j!=0){
+         if(i==0 && j==0){
+            A[0][0]=t.size();
+         }
+         else{
             A[i][j]=sumatorio(n, t, i+j, 0);
          }
       }
@@ -163,10 +165,12 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
 void ajusteDatosSofisticado(std::vector<double> n, std::vector<double> t){
    std::vector<std::vector<double> > A(2, std::vector<double>(2,0));
 
-   A[0][0]=t.size();
    for(int i=0; i<2; i++){
       for(int j=0; j<2; j++){
-         if(i!=0 && j!=0){
+         if(i==0 && j==0){
+            A[0][0]=t.size();
+         }
+         else{
             A[i][j]=sumatorio(n, t, i+j, 0);
          }
       }
