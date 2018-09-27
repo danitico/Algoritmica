@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <cstdlib>
 void obtenerDatosDeSacudida(){
    std::vector<double> n;
    std::vector<double> t;
@@ -38,7 +39,7 @@ void obtenerDatosDeSacudida(){
             reloj.start();
             a.ordenacionSacudida();
             reloj.stop();
-            assert(a.estaOrdenado());
+            // assert(a.estaOrdenado());
 
             sumatorio+=reloj.elapsed();
             a.rellenarVector();
@@ -49,6 +50,7 @@ void obtenerDatosDeSacudida(){
       }
       std::cout << "Ordenación terminada" << '\n';
       ajusteDatosnoSofisticado(n, t);
+      system("./../src/sacudida.sh");
 }
    else{
       std::cout << "Se han introducido datos inconsistentes" << '\n';
@@ -86,7 +88,7 @@ void obtenerDatosDeQuicksort(){
             reloj.start();
             a.quicksort(0, i);
             reloj.stop();
-            assert(a.estaOrdenado());
+            // assert(a.estaOrdenado());
 
             sumatorio+=reloj.elapsed();
             a.rellenarVector();
@@ -97,6 +99,7 @@ void obtenerDatosDeQuicksort(){
       }
       std::cout << "ordenación terminada" << '\n';
       ajusteDatosSofisticado(n, t);
+      system("./../src/quicksort.sh");
    }
    else{
       std::cout << "Se han introducido datos inconsistentes" << '\n';
@@ -159,28 +162,30 @@ void ajusteDatosnoSofisticado(std::vector<double> n, std::vector<double> t){
    double coeficiente=((sumatorio(t, tiempoestimado, 1, 1)/n.size())-(media1*media2))/(acumulado1*acumulado2);
    coeficiente=pow(coeficiente, 2);
 
-   guardarDatos(n, t, tiempoestimado, "sacudida.txt");
+   guardarDatos(n, t, tiempoestimado, "./../images/sacudida.txt");
    verFunciones(X, coeficiente);
 }
 void ajusteDatosSofisticado(std::vector<double> n, std::vector<double> t){
    std::vector<std::vector<double> > A(2, std::vector<double>(2,0));
+   std::vector<double> v=n;
+   for(int i=0; i<v.size(); i++){
+      v[i]=v[i]*log10(v[i]);
+   }
 
    for(int i=0; i<2; i++){
       for(int j=0; j<2; j++){
          if(i==0 && j==0){
             A[0][0]=t.size();
-            std::cout << "elemento 0: " << A[0][0] << '\n';
          }
          else{
-            A[i][j]=sumatorio(n, t, i+j, 0);
-            cout<<"i:j : "<<A[i][j]<<std::endl;
+            A[i][j]=sumatorio(v, t, i+j, 0);
          }
       }
    }
 
    std::vector<std::vector<double> > B(2, std::vector<double>(1,0));
-   B[0][0]=sumatorio(n, t, 0, 1);
-   B[1][0]=sumatorio(n, t, 1, 1);
+   B[0][0]=sumatorio(v, t, 0, 1);
+   B[1][0]=sumatorio(v, t, 1, 1);
 
    std::vector<std::vector<double> > X(2, std::vector<double>(1,0));
 
@@ -191,7 +196,7 @@ void ajusteDatosSofisticado(std::vector<double> n, std::vector<double> t){
 
    std::vector<double> tiempoestimado(n.size(), 0);
    for(int i=0; i<tiempoestimado.size(); i++){
-      tiempoestimado[i]=X[0][0] + (X[1][0]*n[i]/*log10(n[i])*/);
+      tiempoestimado[i]=X[0][0] + (X[1][0]*n[i]*log10(n[i]));
       media1+=tiempoestimado[i];
    }
    media1=media1/tiempoestimado.size();
@@ -218,7 +223,7 @@ void ajusteDatosSofisticado(std::vector<double> n, std::vector<double> t){
    double coeficiente=((sumatorio(t, tiempoestimado, 1, 1)/n.size())-(media1*media2))/(acumulado1*acumulado2);
    coeficiente=pow(coeficiente,2);
 
-   guardarDatos(n, t, tiempoestimado, "quicksort.txt");
+   guardarDatos(n, t, tiempoestimado, "./../images/quicksort.txt");
    verFunciones(X, coeficiente);
 }
 void verFunciones(std::vector<std::vector<double> > & X, double & coeficiente){

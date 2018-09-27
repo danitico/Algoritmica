@@ -55,7 +55,7 @@ void Vector::ordenacionSacudida(){
       }
    }
 
-   assert(estaOrdenado());
+   // assert(estaOrdenado());
 }
 void Vector::quicksort(int primero, int ultimo){
    if(primero < ultimo){
