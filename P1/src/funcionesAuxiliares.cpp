@@ -230,11 +230,11 @@ void verFunciones(std::vector<std::vector<double> > & X, double & coeficiente){
    int elementos=-1;
    if(X.size()==2){
       std::cout << "La función es:" << '\n';
-      std::cout << X[1][0] << "x+" << X[0][0] <<'\n';
+      std::cout << X[1][0] << "x" << std::showpos << X[0][0] << std::noshowpos << '\n';
    }
    else{
       std::cout << "La función es:" << '\n';
-      std::cout << X[2][0] << "x²+" << X[1][0] << "x+" << X[0][0] <<'\n';
+      std::cout << X[2][0] << "x²" << std::showpos << X[1][0] << "x" << X[0][0] << std::noshowpos << '\n';
    }
    std::cout << "Su coeficiente determinacion: " << coeficiente << std::endl << std::endl;
 
@@ -246,8 +246,14 @@ void verFunciones(std::vector<std::vector<double> > & X, double & coeficiente){
          std::cout << "Con un tamaño de " << elementos << " elementos quicksort tardará " << X[0][0] + (X[1][0]*elementos*log10(elementos)) << " microsegundos" << '\n';
       }
       else{
-         if(elementos!=0)
-            std::cout << "Con un tamaño de " << elementos << " elementos Sacudida tardará " << X[0][0]+X[1][0]*elementos+pow(elementos,2)*X[2][0] << " microsegundos" << '\n';
+         if(elementos!=0){
+            if(elementos>=10000000){
+               std::cout << "Con un tamaño de " << elementos << " elementos Sacudida tardará " << (X[0][0]+X[1][0]*elementos+pow(elementos,2)*X[2][0])/3.154e+13 << " dias" << '\n';
+            }
+            else{
+               std::cout << "Con un tamaño de " << elementos << " elementos Sacudida tardará " << X[0][0]+X[1][0]*elementos+pow(elementos,2)*X[2][0] << " microsegundos" << '\n';
+            }
+         }
       }
    }
 }
