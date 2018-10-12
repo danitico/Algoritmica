@@ -18,8 +18,7 @@ int main(){
             combinatorios();
             break;
          case 2:
-            Hanoi(3, 1, 2, contador);
-            std::cout << "contador: " << contador << '\n';
+            datosHanoi();
          case 3:
             //salir
             break;

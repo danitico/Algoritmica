@@ -167,15 +167,50 @@ void preparacionMatriz(std::vector<std::vector<double> > & datos, int filas, int
       }
    }
 }
-void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador){
+void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador, bool flag){
    if(discos>0){
       Hanoi(discos-1, varilla_origen, 6-varilla_origen-varilla_destino, contador);
       contador++;
-      std::cout << varilla_origen << "--->>>" << varilla_destino << '\n';
+      if(flag){
+         std::cout << varilla_origen << "--->>>" << varilla_destino << '\n';
+      }
       Hanoi(discos-1, 6-varilla_origen-varilla_destino, varilla_destino, contador);
    }
 }
-void guardarDatos(std::vector<double> & n, std::vector<double> & t, std::string fichero){
+void datosHanoi(){
+   std::vector<double> n, t;
+   Clock c;
+   double sumatorio=0.0;
+   int n_minimo=0, n_maximo=0, repeticiones=0, varilla_origen=0, varilla_destino=0, contador=0;
+
+   std::cout << "Introduzca el rango inferior de discos: ";
+   std::cin >> n_minimo;
+
+   std::cout << "Introduzca el rango superior de discos: ";
+   std::cin >> n_maximo;
+
+   std::cout << "Introduzca la varilla inicial: ";
+   std::cin >> varilla_origen;
+
+   std::cout << "Introduzca la varilla destino: ";
+   std::cin >> varilla_destino;
+
+   std::cout << "Introduzca el número de repeticiones: ";
+   std::cin >> repeticiones;
+
+   for(int i=n_minimo; i<=n_maximo; i++){
+      for(int j=0; j<repeticiones; j++){
+         c.start();
+         Hanoi(i, varilla_origen, varilla_destino, contador);
+         c.stop();
+         sumatorio+=c.elapsed();
+      }
+      n.push_back(i);
+      t.push_back(sumatorio/repeticiones);
+   }
+   guardarDatos(n, t, "hanoi.txt");
+}
+void guardarDatos(std::vector<double> & n, std::vector<double> & t, std::string fichero, std::vector<double> & estimado){
    std::ofstream file(fichero.c_str());
    if(file.is_open()){
       for(int i=0; i<n.size(); i++){
