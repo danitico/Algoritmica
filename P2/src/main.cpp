@@ -3,6 +3,7 @@
 #include "funcionesAuxiliares.hpp"
 int main(){
    int opcion=0;
+   std::vector<std::vector<unsigned long long int> > datos(301, std::vector<unsigned long long int>(11, 0));
    do{
       std::cout << "\t  Menu" << '\n';
       std::cout << "------------------------" << '\n';
@@ -14,7 +15,17 @@ int main(){
 
       switch (opcion) {
          case 1:
-            std::cout << combinatorioConRecursividad(6, 4) << '\n';
+            // std::cout << "Recursividad: " << combinatorioConRecursividad(50, 10) << '\n';
+            // std::cout << "Sin Recursividad: " << combinatorioSinRecursividad(50, 10) << '\n';
+            for(int i=0; i<301; i++){
+               for(int j=0; j<11; j++){
+                  if(i==j || j==0){
+                     datos[i][j]=1;
+                  }
+               }
+            }
+            std::cout << "Recursividad con tabla: " << combinatorioConRecursividadyTabla(300, 10, datos) << '\n';
+
             break;
          case 2:
             //opcion 2
