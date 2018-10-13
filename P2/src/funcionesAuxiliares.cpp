@@ -1,4 +1,4 @@
-#include "funcionesAuxiliares.hpp"
+t#include "funcionesAuxiliares.hpp"
 #include "Tiempo.hpp"
 #include <iostream>
 #include <fstream>
@@ -47,7 +47,6 @@ double combinatorioConRecursividadyTabla(int n, int k, std::vector<std::vector<d
             datos[n-1][k-1]=combinatorio1;
          }
          else{
-            // std::cout << ":)" << '\n';
             combinatorio1=datos[n-1][k-1];
          }
 
@@ -56,7 +55,6 @@ double combinatorioConRecursividadyTabla(int n, int k, std::vector<std::vector<d
             datos[n-1][k]=combinatorio2;
          }
          else{
-            // std::cout << ":))" << '\n';
             combinatorio2=datos[n-1][k];
          }
 
@@ -64,17 +62,15 @@ double combinatorioConRecursividadyTabla(int n, int k, std::vector<std::vector<d
          return combinatorio1 + combinatorio2;
       }
       else{
-         // std::cout << ":)))" << '\n';
          return datos[n][k];
       }
    }
 }
-void combinatorios(/*int n_minimo, int n_maximo, int repeticiones*/){
-   std::vector<std::vector<double> > datos;
-   std::vector<double> n1, t1, n2, t2, n3, t3;
-   Clock c1, c2, c3;
+void combinatorios1(){
+   std::vector<double> n, t;
+   Clock c;
    double sumatorio=0.0;
-   int n_minimo=0, n_maximo=0, repeticiones=0;
+   int n_minimo=n_maximo=0repeticiones=0;
 
    std::cout << "Introduzca el rango inferior de n: ";
    std::cin >> n_minimo;
@@ -87,74 +83,75 @@ void combinatorios(/*int n_minimo, int n_maximo, int repeticiones*/){
 
    for(int i=n_minimo; i<=n_maximo; i++){
       for(int j=0; j<repeticiones; j++){
-         c1.start();
+         c.start();
          for(int k=0; k<=i; k++){
             combinatorioConRecursividad(i, k);
          }
-         c1.stop();
-         sumatorio+=c1.elapsed();
+         c.stop();
+         sumatorio+=c.elapsed();
       }
-      n1.push_back(i);
-      t1.push_back(sumatorio/repeticiones);
+      n.push_back(i);
+      t.push_back(sumatorio/repeticiones);
    }
-   guardarDatos(n1, t1, "SoloRecursividad.txt");
-
-////////////////////////////////////////////////////////////////////////////////
-
-   sumatorio=0.0;
-   n_minimo=0, n_maximo=0, repeticiones=0;
+   guardarDatos(n, t, "SoloRecursividad.txt");
+}
+void combinatorios2(){
+   std::vector<double> n, t;
+   Clock c;
+   double sumatorio=0.0;
+   int n_minimo=n_maximo=repeticiones=0;
+   Datos a;
 
    std::cout << "Introduzca el rango inferior de n: ";
    std::cin >> n_minimo;
-
    std::cout << "Introduzca el rango superior de n: ";
    std::cin >> n_maximo;
-
    std::cout << "Introduzca el número de repeticiones: ";
    std::cin >> repeticiones;
 
    for(int i=n_minimo; i<=n_maximo; i++){
       for(int j=0; j<repeticiones; j++){
-         c2.start();
+         c.start();
          for(int k=0; k<=i; k++){
             combinatorioSinRecursividad(i, k);
          }
-         c2.stop();
-         sumatorio+=c2.elapsed();
+         c.stop();
+         sumatorio+=c.elapsed();
       }
-      n2.push_back(i);
-      t2.push_back(sumatorio/repeticiones);
+      n.push_back(i);
+      t.push_back(sumatorio/repeticiones);
    }
-   guardarDatos(n2, t2, "SinRecursividad.txt");
-
-////////////////////////////////////////////////////////////////////////////////
-
-   sumatorio=0.0;
-   n_minimo=0, n_maximo=0, repeticiones=0;
+   guardarDatos(n, t, "SinRecursividad.txt");
+}
+void combinatorios3(){
+   std::vector<std::vector<double> > datos;
+   std::vector<double> n, t;
+   Clock c;
+   double sumatorio=0.0;
+   int n_minimo=n_maximo=repeticiones=0;
+   Datos a;
 
    std::cout << "Introduzca el rango inferior de n: ";
    std::cin >> n_minimo;
-
    std::cout << "Introduzca el rango superior de n: ";
    std::cin >> n_maximo;
-
    std::cout << "Introduzca el número de repeticiones: ";
    std::cin >> repeticiones;
 
    for(int i=n_minimo; i<=n_maximo; i++){
       for(int j=0; j<repeticiones; j++){
          preparacionMatriz(datos, i, i);
-         c3.start();
+         c.start();
          for(int k=0; k<=i; k++){
             combinatorioConRecursividadyTabla(i, k, datos);
          }
-         c3.stop();
-         sumatorio+=c3.elapsed();
+         c.stop();
+         sumatorio+=c.elapsed();
       }
-      n3.push_back(i);
-      t3.push_back(sumatorio/repeticiones);
+      n.push_back(i);
+      t.push_back(sumatorio/repeticiones);
    }
-   guardarDatos(n3, t3, "RecursividadConTabla.txt");
+   guardarDatos(n, t, "RecursividadConTabla.txt");
 }
 void preparacionMatriz(std::vector<std::vector<double> > & datos, int filas, int columnas){
    datos.clear();
@@ -181,20 +178,17 @@ void datosHanoi(){
    std::vector<double> n, t;
    Clock c;
    double sumatorio=0.0;
-   int n_minimo=0, n_maximo=0, repeticiones=0, varilla_origen=0, varilla_destino=0, contador=0;
+   int n_minimo=n_maximo=repeticiones=varilla_origen=varilla_destino=contador=0;
+   Datos a;
 
    std::cout << "Introduzca el rango inferior de discos: ";
    std::cin >> n_minimo;
-
    std::cout << "Introduzca el rango superior de discos: ";
    std::cin >> n_maximo;
-
    std::cout << "Introduzca la varilla inicial: ";
    std::cin >> varilla_origen;
-
    std::cout << "Introduzca la varilla destino: ";
    std::cin >> varilla_destino;
-
    std::cout << "Introduzca el número de repeticiones: ";
    std::cin >> repeticiones;
 
@@ -208,6 +202,9 @@ void datosHanoi(){
       n.push_back(i);
       t.push_back(sumatorio/repeticiones);
    }
+   a.setN(n);
+   a.setT(t);
+
    guardarDatos(n, t, "hanoi.txt");
 }
 void guardarDatos(std::vector<double> & n, std::vector<double> & t, std::string fichero, std::vector<double> & estimado){

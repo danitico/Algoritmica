@@ -2,13 +2,14 @@
 #define FUNCIONES_AUXILIARES_HPP
 #include <vector>
 #include <string>
+#include "Datos.hpp"
 double combinatorioConRecursividad(int n, int k);
 double combinatorioSinRecursividad(int n, int k);
 double combinatorioConRecursividadyTabla(int n, int k, std::vector<std::vector<double> > & datos);
-void combinatorios(/*int n_minimo, int n_maximo, int repeticiones*/);
+void combinatorios1();
+void combinatorios2();
+void combinatorios3();
 void preparacionMatriz(std::vector<std::vector<double> > & datos, int filas, int columnas);
 void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador, bool flag=false);
 void datosHanoi();
-double coeficienteDeterminacion(std::vector<double> & n, std::vector<double> & t);
-void guardarDatos(std::vector<double> & n, std::vector<double> & t, std::string fichero, std::vector<double> & estimado=std::vector<double>(0,0));
 #endif
