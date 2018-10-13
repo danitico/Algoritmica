@@ -15,8 +15,8 @@ int main(){
 
       switch (opcion) {
          case 1:
-            // combinatorios1();
-            combinatorios2();
+            combinatorios1();
+            // combinatorios2();
             // combinatorios3();
             break;
          case 2:
