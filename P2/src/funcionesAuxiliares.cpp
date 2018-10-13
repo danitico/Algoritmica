@@ -1,4 +1,4 @@
-t#include "funcionesAuxiliares.hpp"
+#include "funcionesAuxiliares.hpp"
 #include "Tiempo.hpp"
 #include <iostream>
 #include <fstream>
@@ -70,7 +70,7 @@ void combinatorios1(){
    std::vector<double> n, t;
    Clock c;
    double sumatorio=0.0;
-   int n_minimo=n_maximo=0repeticiones=0;
+   int n_minimo=0, n_maximo=0, repeticiones=0;
 
    std::cout << "Introduzca el rango inferior de n: ";
    std::cin >> n_minimo;
@@ -93,14 +93,15 @@ void combinatorios1(){
       n.push_back(i);
       t.push_back(sumatorio/repeticiones);
    }
-   guardarDatos(n, t, "SoloRecursividad.txt");
+   Datos a(n, t);
+
+   a.guardarDatos("SoloRecursividad.txt");
 }
 void combinatorios2(){
    std::vector<double> n, t;
    Clock c;
    double sumatorio=0.0;
-   int n_minimo=n_maximo=repeticiones=0;
-   Datos a;
+   int n_minimo=0, n_maximo=0, repeticiones=0;
 
    std::cout << "Introduzca el rango inferior de n: ";
    std::cin >> n_minimo;
@@ -121,15 +122,16 @@ void combinatorios2(){
       n.push_back(i);
       t.push_back(sumatorio/repeticiones);
    }
-   guardarDatos(n, t, "SinRecursividad.txt");
+   Datos a(n, t);
+
+   a.guardarDatos("SinRecursividad.txt");
 }
 void combinatorios3(){
    std::vector<std::vector<double> > datos;
    std::vector<double> n, t;
    Clock c;
    double sumatorio=0.0;
-   int n_minimo=n_maximo=repeticiones=0;
-   Datos a;
+   int n_minimo=0, n_maximo=0, repeticiones=0;
 
    std::cout << "Introduzca el rango inferior de n: ";
    std::cin >> n_minimo;
@@ -151,7 +153,9 @@ void combinatorios3(){
       n.push_back(i);
       t.push_back(sumatorio/repeticiones);
    }
-   guardarDatos(n, t, "RecursividadConTabla.txt");
+   Datos a(n, t);
+
+   a.guardarDatos("RecursividadConTabla.txt");
 }
 void preparacionMatriz(std::vector<std::vector<double> > & datos, int filas, int columnas){
    datos.clear();
@@ -176,10 +180,10 @@ void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador, 
 }
 void datosHanoi(){
    std::vector<double> n, t;
+   std::vector<std::vector<double> > X;
    Clock c;
    double sumatorio=0.0;
-   int n_minimo=n_maximo=repeticiones=varilla_origen=varilla_destino=contador=0;
-   Datos a;
+   int n_minimo=0, n_maximo=0, repeticiones=0, varilla_origen=0 ,varilla_destino=0, contador=0;
 
    std::cout << "Introduzca el rango inferior de discos: ";
    std::cin >> n_minimo;
@@ -202,17 +206,24 @@ void datosHanoi(){
       n.push_back(i);
       t.push_back(sumatorio/repeticiones);
    }
-   a.setN(n);
-   a.setT(t);
 
-   guardarDatos(n, t, "hanoi.txt");
-}
-void guardarDatos(std::vector<double> & n, std::vector<double> & t, std::string fichero, std::vector<double> & estimado){
-   std::ofstream file(fichero.c_str());
-   if(file.is_open()){
-      for(int i=0; i<n.size(); i++){
-         file<<n[i]<<" "<<t[i]<<std::endl;
-      }
-      file.close();
+   Datos a(n, t);
+   std::vector<double> estimado(n.size(), 0);
+   std::vector<double> modificado(n.size(), 0);
+
+   for(int i=0; i<n.size(); i++){
+      modificado[i]=pow(2, n[i]);
+      // std::cout << modificado[i] << '\n';
    }
+
+   a.setModifiedN(modificado);
+   a.calculoCoeficientes(X, 2);
+
+   for(int i=0; i<estimado.size(); i++){
+      estimado[i]=X[0][0]+X[1][0]*pow(2, n[i]);
+   }
+   
+   a.setEstimado(estimado);
+   std::cout << "coeficiente: " << a.coeficienteDeterminacion() << '\n';
+   a.guardarDatos("hanoi.txt");
 }

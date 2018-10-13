@@ -1,13 +1,6 @@
 #include "Datos.hpp"
+#include "sistemaEcuaciones.hpp"
 #include <fstream>
-#include <cmath>
-double Datos::sumatorio(int a, int b){
-   double sumatorio=0.0;
-   for(int i=0; i<(this->n.size()); i++){
-      sumatorio+=pow(this->n[i], a)*pow(this->t[i], b);
-   }
-   return sumatorio;
-}
 void Datos::guardarDatos(std::string fichero){
    std::ofstream file(fichero.c_str());
    if(file.is_open()){
@@ -17,8 +10,8 @@ void Datos::guardarDatos(std::string fichero){
       file.close();
    }
 }
-double coeficienteDeterminacion(){
-   double media1=media2=acumulado1=acumulado2=0.0;
+double Datos::coeficienteDeterminacion(){
+   double media1=0.0, media2=0.0, acumulado1=0.0, acumulado2=0.0;
 
    for(int i=0; i<(this->estimado.size()); i++){
       media1+=this->estimado[i];
@@ -39,4 +32,33 @@ double coeficienteDeterminacion(){
    acumulado2=acumulado2/this->t.size();
 
    return acumulado1/acumulado2;
+}
+double Datos::sumatorio(int a, int b){
+   double sumatorio=0.0;
+   for(int i=0; i<(this->n_modificado.size()); i++){
+      sumatorio+=pow(this->n_modificado[i], a)*pow(this->t[i], b);
+   }
+   return sumatorio;
+}
+void Datos::calculoCoeficientes(std::vector<std::vector<double> > & X, int orden){
+   std::vector<std::vector<double> > A(orden, std::vector<double>(orden,0));
+   std::vector<std::vector<double> > B(orden, std::vector<double>(1,0));
+   X.resize(orden, std::vector<double>(1, 0));
+
+   for(int i=0; i<orden; i++){
+      for(int j=0; j<orden; j++){
+         if(i==0 && j==0){
+            A[0][0]=this->t.size();
+         }
+         else{
+            A[i][j]=sumatorio(i+j, 0);
+         }
+      }
+   }
+
+   for(int i=0; i<orden; i++){
+      B[i][0]=sumatorio(i, 1);
+   }
+
+   resolverSistemaEcuaciones(A, B, orden, X);
 }

@@ -15,7 +15,9 @@ int main(){
 
       switch (opcion) {
          case 1:
-            combinatorios();
+            // combinatorios1();
+            combinatorios2();
+            // combinatorios3();
             break;
          case 2:
             datosHanoi();
