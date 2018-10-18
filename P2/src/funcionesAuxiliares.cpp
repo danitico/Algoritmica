@@ -2,6 +2,7 @@
 #include "Tiempo.hpp"
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 double combinatorioConRecursividad(int n, int k) {
    if(n==k || k==0){
       return 1;
@@ -113,6 +114,7 @@ void combinatorios1(){
    a.setEstimado(estimado);
    std::cout << "coeficiente: " << a.coeficienteDeterminacion() << '\n';
    a.guardarDatos("SoloRecursividad.txt");
+   system("../src/grafico.sh SoloRecursividad.txt");
 }
 void combinatorios2(){
    std::vector<double> n, t;
@@ -153,9 +155,11 @@ void combinatorios2(){
    a.setEstimado(estimado);
    std::cout << "coeficiente: " << a.coeficienteDeterminacion() << '\n';
    a.guardarDatos("SinRecursividad.txt");
+   system("../src/grafico.sh SinRecursividad.txt");
 }
 void combinatorios3(){
    std::vector<std::vector<double> > datos;
+   std::vector<std::vector<double> > X;
    std::vector<double> n, t;
    Clock c;
    double sumatorio=0.0;
@@ -182,8 +186,19 @@ void combinatorios3(){
       t.push_back(sumatorio/repeticiones);
    }
    Datos a(n, t);
+   std::vector<double> estimado(n.size(), 0);
 
+   a.setModifiedN(n);
+   a.calculoCoeficientes(X, 3);
+
+   for(int i=0; i<estimado.size(); i++){
+      estimado[i]=X[0][0]+X[1][0]*n[i]+pow(n[i],2)*X[2][0];
+   }
+
+   a.setEstimado(estimado);
+   std::cout << "coeficiente: " << a.coeficienteDeterminacion() << '\n';
    a.guardarDatos("RecursividadConTabla.txt");
+   system("../src/grafico.sh RecursividadConTabla.txt");
 }
 void preparacionMatriz(std::vector<std::vector<double> > & datos, int filas, int columnas){
    datos.clear();
@@ -241,7 +256,6 @@ void datosHanoi(){
 
    for(int i=0; i<n.size(); i++){
       modificado[i]=pow(2, n[i]);
-      // std::cout << modificado[i] << '\n';
    }
 
    a.setModifiedN(modificado);
@@ -254,4 +268,5 @@ void datosHanoi(){
    a.setEstimado(estimado);
    std::cout << "coeficiente: " << a.coeficienteDeterminacion() << '\n';
    a.guardarDatos("hanoi.txt");
+   system("../src/grafico.sh hanoi.txt");
 }

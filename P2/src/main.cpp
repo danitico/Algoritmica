@@ -3,6 +3,7 @@
 #include "funcionesAuxiliares.hpp"
 int main(){
    int opcion=0;
+   int opcion1=0;
    int contador=0;
    do{
       std::cout << "\t  Menu" << '\n';
@@ -15,12 +16,35 @@ int main(){
 
       switch (opcion) {
          case 1:
-            combinatorios1();
-            // combinatorios2();
-            // combinatorios3();
+            while(opcion1!=4){
+               std::cout << "1. Mediante recursividad" << '\n';
+               std::cout << "2. Sin recursividad" << '\n';
+               std::cout << "3. Mediante recursividad y tabla" << '\n';
+               std::cout << "4. Salir del submenú" << '\n';
+               std::cout << "Introduzca la opción deseada: ";
+               std::cin >> opcion1;
+
+               switch(opcion1){
+                  case 1:
+                     combinatorios1();
+                     break;
+                  case 2:
+                     combinatorios2();
+                     break;
+                  case 3:
+                     combinatorios3();
+                     break;
+                  case 4:
+                     break;
+                  default:
+                     std::cout << "Error" << '\n';
+                     break;
+               }
+            }
             break;
          case 2:
             datosHanoi();
+            break;
          case 3:
             //salir
             break;
