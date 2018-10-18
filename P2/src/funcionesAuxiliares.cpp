@@ -211,12 +211,16 @@ void preparacionMatriz(std::vector<std::vector<double> > & datos, int filas, int
       }
    }
 }
-void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador, bool flag){
+void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador, bool flag, std::vector<std::vector<int> > & varillas){
    if(discos>0){
       Hanoi(discos-1, varilla_origen, 6-varilla_origen-varilla_destino, contador);
       contador++;
       if(flag){
-         std::cout << varilla_origen << "--->>>" << varilla_destino << '\n';
+         for(int j=0; i<3; j++){
+            for(int i=2; j>=0; j--){
+               
+            }
+         }
       }
       Hanoi(discos-1, 6-varilla_origen-varilla_destino, varilla_destino, contador);
    }
@@ -269,4 +273,7 @@ void datosHanoi(){
    std::cout << "coeficiente: " << a.coeficienteDeterminacion() << '\n';
    a.guardarDatos("hanoi.txt");
    system("../src/grafico.sh hanoi.txt");
+}
+void HanoiGrafico(){
+
 }

@@ -10,6 +10,7 @@ void combinatorios1();
 void combinatorios2();
 void combinatorios3();
 void preparacionMatriz(std::vector<std::vector<double> > & datos, int filas, int columnas);
-void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador, bool flag=false);
+void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador, bool flag=false, std::vector<std::vector<int> > & varillas=std::vector<int>(0, std::vector<int>(0, 0)) );
 void datosHanoi();
+void HanoiGrafico();
 #endif
