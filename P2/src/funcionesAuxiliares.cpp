@@ -112,9 +112,21 @@ void combinatorios1(){
    }
 
    a.setEstimado(estimado);
-   std::cout << "coeficiente: " << a.coeficienteDeterminacion() << '\n';
    a.guardarDatos("SoloRecursividad.txt");
-   system("../src/grafico.sh SoloRecursividad.txt");
+   system("../src/grafico.sh SoloRecursividad");
+   
+   std::cout << "Coeficiente de Determinación: " << a.coeficienteDeterminacion() << std::endl;
+   std::cout << "La función es: ";
+   std::cout << X[1][0] << "(2^x)" << std::showpos << X[0][0] << std::noshowpos << std::endl;
+
+   int x=-1;
+   while(x!=0){
+      std::cout << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): ";
+      std::cin >> x;
+      if(x!=0){
+         std::cout << "Con n igual a " << x << " discos tardará " << (X[0][0]+X[1][0]*pow(2, x))/3.154e+13 << " dias" << std::endl;
+      }
+   }
 }
 void combinatorios2(){
    std::vector<double> n, t;
@@ -153,9 +165,21 @@ void combinatorios2(){
    }
 
    a.setEstimado(estimado);
-   std::cout << "coeficiente: " << a.coeficienteDeterminacion() << '\n';
    a.guardarDatos("SinRecursividad.txt");
-   system("../src/grafico.sh SinRecursividad.txt");
+   system("../src/grafico.sh SinRecursividad");
+
+   std::cout << "Coeficiente de Determinación: " << a.coeficienteDeterminacion() << std::endl;
+   std::cout << "La función es: ";
+   std::cout << X[2][0] << "x²" << std::showpos << X[1][0] << "x" << X[0][0] << std::noshowpos << std::endl;
+
+   int x=-1;
+   while(x!=0){
+      std::cout << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): ";
+      std::cin >> x;
+      if(x!=0){
+         std::cout << "Con n igual a " << x << " tardará " << (X[0][0]+X[1][0]*x+pow(x,2)*X[2][0])/3.154e+13 << " dias" << std::endl;
+      }
+   }
 }
 void combinatorios3(){
    std::vector<std::vector<double> > datos;
@@ -196,9 +220,21 @@ void combinatorios3(){
    }
 
    a.setEstimado(estimado);
-   std::cout << "coeficiente: " << a.coeficienteDeterminacion() << '\n';
    a.guardarDatos("RecursividadConTabla.txt");
-   system("../src/grafico.sh RecursividadConTabla.txt");
+   system("../src/grafico.sh RecursividadConTabla");
+
+   std::cout << "Coeficiente de Determinación: " << a.coeficienteDeterminacion() << std::endl;
+   std::cout << "La función es: ";
+   std::cout << X[2][0] << "x²" << std::showpos << X[1][0] << "x" << X[0][0] << std::noshowpos << std::endl;
+
+   int x=-1;
+   while(x!=0){
+      std::cout << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): ";
+      std::cin >> x;
+      if(x!=0){
+         std::cout << "Con n igual a " << x << " tardará " << (X[0][0]+X[1][0]*x+pow(x,2)*X[2][0])/3.154e+13 << " dias" << std::endl;
+      }
+   }
 }
 void preparacionMatriz(std::vector<std::vector<double> > & datos, int filas, int columnas){
    datos.clear();
@@ -211,17 +247,10 @@ void preparacionMatriz(std::vector<std::vector<double> > & datos, int filas, int
       }
    }
 }
-void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador, bool flag, std::vector<std::vector<int> > & varillas){
+void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador){
    if(discos>0){
       Hanoi(discos-1, varilla_origen, 6-varilla_origen-varilla_destino, contador);
       contador++;
-      if(flag){
-         for(int j=0; i<3; j++){
-            for(int i=2; j>=0; j--){
-               
-            }
-         }
-      }
       Hanoi(discos-1, 6-varilla_origen-varilla_destino, varilla_destino, contador);
    }
 }
@@ -270,10 +299,19 @@ void datosHanoi(){
    }
 
    a.setEstimado(estimado);
-   std::cout << "coeficiente: " << a.coeficienteDeterminacion() << '\n';
-   a.guardarDatos("hanoi.txt");
-   system("../src/grafico.sh hanoi.txt");
-}
-void HanoiGrafico(){
+   a.guardarDatos("Hanoi.txt");
+   system("../src/grafico.sh Hanoi");
 
+   std::cout << "Coeficiente de Determinación: " << a.coeficienteDeterminacion() << std::endl;
+   std::cout << "La función es: ";
+   std::cout << X[1][0] << "(2^x)" << std::showpos << X[0][0] << std::noshowpos << std::endl;
+
+   int x=-1;
+   while(x!=0){
+      std::cout << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): ";
+      std::cin >> x;
+      if(x!=0){
+         std::cout << "Con " << x << " discos tardará " << (X[0][0]+X[1][0]*pow(2, x))/3.154e+13 << " dias" << std::endl;
+      }
+   }
 }
