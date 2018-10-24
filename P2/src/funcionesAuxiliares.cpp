@@ -74,13 +74,13 @@ void combinatorios1(){
    double sumatorio=0.0;
    int n_minimo=0, n_maximo=0, repeticiones=0;
 
-   std::cout << "Introduzca el rango inferior de n: ";
+   std::cout << BIPURPLE << "Introduzca el rango inferior de n: " << RESET;
    std::cin >> n_minimo;
 
-   std::cout << "Introduzca el rango superior de n: ";
+   std::cout << BIPURPLE << "Introduzca el rango superior de n: " << RESET;
    std::cin >> n_maximo;
 
-   std::cout << "Introduzca el número de repeticiones: ";
+   std::cout << BIPURPLE << "Introduzca el número de repeticiones: " << RESET;
    std::cin >> repeticiones;
 
    for(int i=n_minimo; i<=n_maximo; i++){
@@ -114,17 +114,17 @@ void combinatorios1(){
    a.setEstimado(estimado);
    a.guardarDatos("SoloRecursividad.txt");
    system("../src/grafico.sh SoloRecursividad");
-   
-   std::cout << "Coeficiente de Determinación: " << a.coeficienteDeterminacion() << std::endl;
-   std::cout << "La función es: ";
-   std::cout << X[1][0] << "(2^x)" << std::showpos << X[0][0] << std::noshowpos << std::endl;
+
+   std::cout << BIBLUE << "Coeficiente de Determinación: " << RESET << IRED << ITALIC << UNDERLINE <<a.coeficienteDeterminacion()<<RESET<<std::endl;
+   std::cout << BIBLUE << "La función es: " << RESET;
+   std::cout << IRED << ITALIC << UNDERLINE << X[1][0] << "(2^x)" << std::showpos << X[0][0] << std::noshowpos << RESET << std::endl;
 
    int x=-1;
    while(x!=0){
-      std::cout << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): ";
+      std::cout << BIPURPLE << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): " << RESET;
       std::cin >> x;
       if(x!=0){
-         std::cout << "Con n igual a " << x << " discos tardará " << (X[0][0]+X[1][0]*pow(2, x))/3.154e+13 << " dias" << std::endl;
+         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " tardará " << RESET << IRED << ITALIC << UNDERLINE << (X[0][0]+X[1][0]*pow(2, x))/3.154e+13 << RESET << BIBLUE << " dias" << RESET << std::endl;
       }
    }
 }
@@ -135,11 +135,13 @@ void combinatorios2(){
    double sumatorio=0.0;
    int n_minimo=0, n_maximo=0, repeticiones=0;
 
-   std::cout << "Introduzca el rango inferior de n: ";
+   std::cout << BIPURPLE << "Introduzca el rango inferior de n: " << RESET;
    std::cin >> n_minimo;
-   std::cout << "Introduzca el rango superior de n: ";
+
+   std::cout << BIPURPLE << "Introduzca el rango superior de n: " << RESET;
    std::cin >> n_maximo;
-   std::cout << "Introduzca el número de repeticiones: ";
+
+   std::cout << BIPURPLE << "Introduzca el número de repeticiones: " << RESET;
    std::cin >> repeticiones;
 
    for(int i=n_minimo; i<=n_maximo; i++){
@@ -168,16 +170,16 @@ void combinatorios2(){
    a.guardarDatos("SinRecursividad.txt");
    system("../src/grafico.sh SinRecursividad");
 
-   std::cout << "Coeficiente de Determinación: " << a.coeficienteDeterminacion() << std::endl;
-   std::cout << "La función es: ";
-   std::cout << X[2][0] << "x²" << std::showpos << X[1][0] << "x" << X[0][0] << std::noshowpos << std::endl;
+   std::cout << BIBLUE << "Coeficiente de Determinación: " << RESET << IRED << ITALIC << UNDERLINE <<a.coeficienteDeterminacion()<<RESET<<std::endl;
+   std::cout << BIBLUE << "La función es: " << RESET;
+   std::cout << IRED << ITALIC << UNDERLINE << X[2][0] << "x²" << std::showpos << X[1][0] << "x" << X[0][0] << std::noshowpos << RESET << std::endl;
 
    int x=-1;
    while(x!=0){
-      std::cout << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): ";
+      std::cout << BIPURPLE << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): " << RESET;
       std::cin >> x;
       if(x!=0){
-         std::cout << "Con n igual a " << x << " tardará " << (X[0][0]+X[1][0]*x+pow(x,2)*X[2][0])/3.154e+13 << " dias" << std::endl;
+         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " tardará " << RESET << IRED << ITALIC << UNDERLINE << (X[0][0]+X[1][0]*x+pow(x,2)*X[2][0])/3.154e+13 << RESET << BIBLUE << " dias" << RESET << std::endl;
       }
    }
 }
@@ -189,11 +191,13 @@ void combinatorios3(){
    double sumatorio=0.0;
    int n_minimo=0, n_maximo=0, repeticiones=0;
 
-   std::cout << "Introduzca el rango inferior de n: ";
+   std::cout << BIPURPLE << "Introduzca el rango inferior de n: " << RESET;
    std::cin >> n_minimo;
-   std::cout << "Introduzca el rango superior de n: ";
+
+   std::cout << BIPURPLE << "Introduzca el rango superior de n: " << RESET;
    std::cin >> n_maximo;
-   std::cout << "Introduzca el número de repeticiones: ";
+
+   std::cout << BIPURPLE << "Introduzca el número de repeticiones: " << RESET;
    std::cin >> repeticiones;
 
    for(int i=n_minimo; i<=n_maximo; i++){
@@ -223,16 +227,16 @@ void combinatorios3(){
    a.guardarDatos("RecursividadConTabla.txt");
    system("../src/grafico.sh RecursividadConTabla");
 
-   std::cout << "Coeficiente de Determinación: " << a.coeficienteDeterminacion() << std::endl;
-   std::cout << "La función es: ";
-   std::cout << X[2][0] << "x²" << std::showpos << X[1][0] << "x" << X[0][0] << std::noshowpos << std::endl;
+   std::cout << BIBLUE << "Coeficiente de Determinación: " << RESET << IRED << ITALIC << UNDERLINE <<a.coeficienteDeterminacion()<<RESET<<std::endl;
+   std::cout << BIBLUE << "La función es: " << RESET;
+   std::cout << IRED << ITALIC << UNDERLINE << X[2][0] << "x²" << std::showpos << X[1][0] << "x" << X[0][0] << std::noshowpos << RESET << std::endl;
 
    int x=-1;
    while(x!=0){
-      std::cout << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): ";
+      std::cout << BIPURPLE << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): " << RESET;
       std::cin >> x;
       if(x!=0){
-         std::cout << "Con n igual a " << x << " tardará " << (X[0][0]+X[1][0]*x+pow(x,2)*X[2][0])/3.154e+13 << " dias" << std::endl;
+         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " tardará " << RESET << IRED << ITALIC << UNDERLINE << (X[0][0]+X[1][0]*x+pow(x,2)*X[2][0])/3.154e+13 << RESET << BIBLUE << " dias" << RESET << std::endl;
       }
    }
 }
@@ -261,16 +265,21 @@ void datosHanoi(){
    double sumatorio=0.0;
    int n_minimo=0, n_maximo=0, repeticiones=0, varilla_origen=0 ,varilla_destino=0, contador=0;
 
-   std::cout << "Introduzca el rango inferior de discos: ";
+   std::cout << BIPURPLE << "Introduzca el rango inferior de n: " << RESET;
    std::cin >> n_minimo;
-   std::cout << "Introduzca el rango superior de discos: ";
+
+   std::cout << BIPURPLE << "Introduzca el rango superior de n: " << RESET;
    std::cin >> n_maximo;
-   std::cout << "Introduzca la varilla inicial: ";
+
+   std::cout << BIPURPLE << "Introduzca la varilla inicial: " << RESET;
    std::cin >> varilla_origen;
-   std::cout << "Introduzca la varilla destino: ";
+
+   std::cout << BIPURPLE << "Introduzca la varilla destino: " << RESET;
    std::cin >> varilla_destino;
-   std::cout << "Introduzca el número de repeticiones: ";
+
+   std::cout << BIPURPLE << "Introduzca el número de repeticiones: " << RESET;
    std::cin >> repeticiones;
+
 
    for(int i=n_minimo; i<=n_maximo; i++){
       for(int j=0; j<repeticiones; j++){
@@ -302,16 +311,16 @@ void datosHanoi(){
    a.guardarDatos("Hanoi.txt");
    system("../src/grafico.sh Hanoi");
 
-   std::cout << "Coeficiente de Determinación: " << a.coeficienteDeterminacion() << std::endl;
-   std::cout << "La función es: ";
-   std::cout << X[1][0] << "(2^x)" << std::showpos << X[0][0] << std::noshowpos << std::endl;
+   std::cout << BIBLUE << "Coeficiente de Determinación: " << RESET << IRED << ITALIC << UNDERLINE <<a.coeficienteDeterminacion()<<RESET<<std::endl;
+   std::cout << BIBLUE << "La función es: " << RESET;
+   std::cout << IRED << ITALIC << UNDERLINE << X[1][0] << "(2^x)" << std::showpos << X[0][0] << std::noshowpos << RESET << std::endl;
 
    int x=-1;
    while(x!=0){
-      std::cout << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): ";
+      std::cout << BIPURPLE << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): " << RESET;
       std::cin >> x;
       if(x!=0){
-         std::cout << "Con " << x << " discos tardará " << (X[0][0]+X[1][0]*pow(2, x))/3.154e+13 << " dias" << std::endl;
+         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " discos tardará " << RESET << IRED << ITALIC << UNDERLINE << (X[0][0]+X[1][0]*pow(2, x))/3.154e+13 << RESET << BIBLUE << " dias" << RESET << std::endl;
       }
    }
 }
