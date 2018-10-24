@@ -6,24 +6,59 @@ int main(){
    int opcion1=0;
    int contador=0;
    do{
-      std::cout << "\t  Menu" << '\n';
-      std::cout << "------------------------" << '\n';
-      std::cout << "1. Calcular el número combinatorio" << '\n';
-      std::cout << "2. Calcular el número de movimientos de las torres de Hanoi" << '\n';
-      std::cout << "3. Salir del programa" << '\n';
-      std::cout << "Introduzca la opción deseada: ";
-      std::cin >> opcion;
+      int posicion=2;
+      std::cout << CLEAR_SCREEN;
+      PLACE(1, 10);
+      std::cout << BIBLUE << "Menu" << RESET;
 
+      posicion++;
+      PLACE(posicion++, 10);
+      std::cout << "1. Calcular el número combinatorio";
+
+      PLACE(posicion++, 10);
+      std::cout << "2. Calcular el número de movimientos de las torres de Hanoi";
+
+      PLACE(posicion++, 10);
+      std::cout << "3. Salir del programa";
+
+      posicion++;
+
+      PLACE(posicion++, 10);
+      std::cout << BIGREEN << "Introduzca la opción deseada: " << RESET;
+      std::cin >> opcion;
+      std::cin.ignore();
+      std::cout << CLEAR_SCREEN;
+
+      PLACE(3, 1);
       switch (opcion) {
          case 1:
             while(opcion1!=4){
-               std::cout << "1. Mediante recursividad" << '\n';
-               std::cout << "2. Sin recursividad" << '\n';
-               std::cout << "3. Mediante recursividad y tabla" << '\n';
-               std::cout << "4. Salir del submenú" << '\n';
-               std::cout << "Introduzca la opción deseada: ";
-               std::cin >> opcion1;
+               posicion=2;
+               std::cout << CLEAR_SCREEN;
+               PLACE(1, 10);
+               std::cout << BIBLUE << "Numeros Combinatorios" << RESET;
 
+               posicion++;
+               PLACE(posicion++, 10);
+               std::cout << "1. Mediante recursividad";
+
+               PLACE(posicion++, 10);
+               std::cout << "2. Sin recursividad";
+
+               PLACE(posicion++, 10);
+               std::cout << "3. Mediante recursividad y tabla";
+
+               PLACE(posicion++, 10);
+               std::cout << "4. Salir del submenú";
+
+               posicion++;
+               PLACE(posicion++, 10);
+               std::cout << BIGREEN << "Introduzca la opción deseada: " << RESET;
+               std::cin >> opcion1;
+               std::cin.ignore();
+               std::cout << CLEAR_SCREEN;
+
+               PLACE(3, 1);
                switch(opcion1){
                   case 1:
                      combinatorios1();
@@ -37,8 +72,27 @@ int main(){
                   case 4:
                      break;
                   default:
-                     std::cout << "Error" << '\n';
+                     std::cout << BIRED;
+         				std::cout << "Opción incorrecta ";
+         				std::cout << RESET;
+         				std::cout << "--> ";
+         				std::cout << ONIRED;
+         				std::cout << opcion << std::endl;
+         				std::cout << RESET;
                      break;
+               }
+               if(opcion1!=4){
+                  std::cout << std::endl << std::endl;
+                  std::cout << "Pulse ";
+                  std::cout << BIGREEN;
+                  std::cout << "ENTER";
+                  std::cout << RESET;
+                  std::cout << " para mostrar el ";
+                  std::cout << INVERSE;
+                  std::cout << "menú";
+                  std::cout << RESET;
+                  std::cin.ignore();
+                  std::cout << CLEAR_SCREEN;
                }
             }
             break;
@@ -46,11 +100,32 @@ int main(){
             datosHanoi();
             break;
          case 3:
-            //salir
+            std::cout << INVERSE;
+            std::cout << "Fin del programa" << std::endl;
+            std::cout << RESET;
             break;
          default:
-            std::cout << "Error" << '\n';
-         break;
+            std::cout << BIRED;
+            std::cout << "Opción incorrecta ";
+            std::cout << RESET;
+            std::cout << "--> ";
+            std::cout << ONIRED;
+            std::cout << opcion << std::endl;
+            std::cout << RESET;
+            break;
+      }
+      if(opcion!=3){
+         std::cout << std::endl << std::endl;
+         std::cout << "Pulse ";
+         std::cout << BIGREEN;
+         std::cout << "ENTER";
+         std::cout << RESET;
+         std::cout << " para mostrar el ";
+         std::cout << INVERSE;
+         std::cout << "menú";
+         std::cout << RESET;
+         std::cin.ignore();
+         std::cout << CLEAR_SCREEN;
       }
    }while(opcion!=3);
 }

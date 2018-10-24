@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "Datos.hpp"
+#include "macros.hpp"
 double combinatorioConRecursividad(int n, int k);
 double combinatorioSinRecursividad(int n, int k);
 double combinatorioConRecursividadyTabla(int n, int k, std::vector<std::vector<double> > & datos);
