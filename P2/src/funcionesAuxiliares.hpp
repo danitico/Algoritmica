@@ -13,4 +13,5 @@ void combinatorios3();
 void preparacionMatriz(std::vector<std::vector<double> > & datos, int filas, int columnas);
 void Hanoi(int discos, int varilla_origen, int varilla_destino, int & contador);
 void datosHanoi();
+void TiempoAlgoritmos(double & tiempo);
 #endif

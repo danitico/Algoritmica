@@ -32,6 +32,7 @@ int main(){
       PLACE(3, 1);
       switch (opcion) {
          case 1:
+            opcion1=0;
             while(opcion1!=4){
                posicion=2;
                std::cout << CLEAR_SCREEN;

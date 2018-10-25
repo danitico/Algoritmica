@@ -124,7 +124,10 @@ void combinatorios1(){
       std::cout << BIPURPLE << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): " << RESET;
       std::cin >> x;
       if(x!=0){
-         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " tardará " << RESET << IRED << ITALIC << UNDERLINE << (X[0][0]+X[1][0]*pow(2, x))/3.154e+13 << RESET << BIBLUE << " dias" << RESET << std::endl;
+         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " tardará " << RESET << IRED << ITALIC << UNDERLINE;
+         double tiempo=X[0][0]+X[1][0]*pow(2, x);
+         TiempoAlgoritmos(tiempo);
+         std::cout << RESET << BIBLUE << " dias" << RESET << std::endl;
       }
    }
 }
@@ -179,7 +182,10 @@ void combinatorios2(){
       std::cout << BIPURPLE << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): " << RESET;
       std::cin >> x;
       if(x!=0){
-         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " tardará " << RESET << IRED << ITALIC << UNDERLINE << (X[0][0]+X[1][0]*x+pow(x,2)*X[2][0])/3.154e+13 << RESET << BIBLUE << " dias" << RESET << std::endl;
+         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " tardará " << RESET << IRED << ITALIC << UNDERLINE;
+         double tiempo=X[0][0]+X[1][0]*x+pow(x,2)*X[2][0];
+         TiempoAlgoritmos(tiempo);
+         std::cout << RESET << BIBLUE << " dias" << RESET << std::endl;
       }
    }
 }
@@ -236,7 +242,10 @@ void combinatorios3(){
       std::cout << BIPURPLE << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): " << RESET;
       std::cin >> x;
       if(x!=0){
-         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " tardará " << RESET << IRED << ITALIC << UNDERLINE << (X[0][0]+X[1][0]*x+pow(x,2)*X[2][0])/3.154e+13 << RESET << BIBLUE << " dias" << RESET << std::endl;
+         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " tardará " << RESET << IRED << ITALIC << UNDERLINE;
+         double tiempo=X[0][0]+X[1][0]*x+pow(x,2)*X[2][0];
+         TiempoAlgoritmos(tiempo);
+         std::cout << RESET << BIBLUE << " dias" << RESET << std::endl;
       }
    }
 }
@@ -320,7 +329,25 @@ void datosHanoi(){
       std::cout << BIPURPLE << "Introduzca un numero de elementos para calcular el tiempo estimado(0 para salir): " << RESET;
       std::cin >> x;
       if(x!=0){
-         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " discos tardará " << RESET << IRED << ITALIC << UNDERLINE << (X[0][0]+X[1][0]*pow(2, x))/3.154e+13 << RESET << BIBLUE << " dias" << RESET << std::endl;
+         std::cout << BIBLUE << "Con n igual a " << RESET << IRED << ITALIC << UNDERLINE << x << RESET << BIBLUE << " discos tardará " << RESET << IRED << ITALIC << UNDERLINE;
+         double tiempo=X[0][0]+X[1][0]*pow(2, x);
+         TiempoAlgoritmos(tiempo);
+         std::cout << RESET << BIBLUE << " dias" << RESET << std::endl;
       }
    }
+}
+void TiempoAlgoritmos(double & tiempo){
+   tiempo=tiempo/pow(10, 6);
+   unsigned long long int tiempoEntero = tiempo;
+
+   unsigned long long int minutos= tiempoEntero/60;
+   unsigned long long int segundos= tiempoEntero%60;
+   unsigned long long int horas= minutos/60;
+   minutos=minutos%60;
+   unsigned long long int dias = horas/24;
+   horas=horas%24;
+   unsigned long long int agnos = dias / 365;
+   dias=dias%365;
+
+   std::cout << agnos << "años, " << dias << " dias, " << horas << " horas, " << minutos << " minutos y " << (float)segundos + (float)tiempo - (float)tiempoEntero << " segundos." << std::endl;
 }
