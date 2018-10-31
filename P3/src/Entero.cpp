@@ -56,3 +56,14 @@ std::string Entero::multiplicarPotencia10(int potencia){
 	aux.agregarCerosFinal(potencia);
 	return aux.getNumero();
 }
+void Entero::operator=(const Entero & entero){
+	this->setNumero(entero.getNumero());
+}
+ostream & operator<<(ostream & stream, const Entero & a){
+	stream << a.getNumero
+	return output;
+}
+istream &operator>>(istream &input, Distance &D){
+	input >> D.feet >> D.inches;
+	return input;
+}

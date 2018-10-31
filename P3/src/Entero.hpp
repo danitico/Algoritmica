@@ -5,7 +5,7 @@ class Entero{
    private:
       std::string numero_;
    public:
-      inline Entero(std::string numero){
+      inline Entero(std::string numero=""){
          this->setNumero(numero);
       }
       inline std::string getNumero() const{
@@ -19,5 +19,7 @@ class Entero{
       void agregarCerosDelante(int nCeros);
       void quitarCerosNoSignificativos();
       std::string multiplicarPotencia10(int potencia);
+      void operator=(const Entero & entero);
+      
 };
 #endif

@@ -6,6 +6,9 @@ TEST(Entero, Constructor){
 
    a.setNumero("2500");
    EXPECT_EQ(a.getNumero(), "2500");
+
+   Entero b;
+   EXPECT_EQ(b.getNumero(), "");
 }
 TEST(Entero, partirCadena){
    Entero a("202030");
@@ -43,6 +46,12 @@ TEST(Entero, quitarCerosNoSignificativos){
 TEST(Entero, multiplicarPotencia10){
    Entero a("25");
    EXPECT_EQ(a.multiplicarPotencia10(3), "25000");
+}
+TEST(Entero, operadores){
+   Entero a("25"), b;
+   b=a;
+
+   EXPECT_EQ(a.getNumero(), b.getNumero());
 }
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
