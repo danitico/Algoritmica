@@ -59,11 +59,52 @@ std::string Entero::multiplicarPotencia10(int potencia){
 void Entero::operator=(const Entero & entero){
 	this->setNumero(entero.getNumero());
 }
-ostream & operator<<(ostream & stream, const Entero & a){
-	stream << a.getNumero
-	return output;
+std::ostream & operator<<(std::ostream & stream, const Entero & a){
+	stream << a.getNumero();
+	return stream;
 }
-istream &operator>>(istream &input, Distance &D){
-	input >> D.feet >> D.inches;
-	return input;
+std::istream & operator>>(std::istream & stream, Entero & a){
+	stream >> a.numero_;
+	return stream;
+}
+Entero Entero::operator+(const Entero & b){
+	Entero aux, aux1;
+   Entero resultado;
+   int x, y, acarreo=0, res=0, len_first=this->getNumero().length(), len_b=b.getNumero().length();
+
+      if(len_first > len_b){
+         aux=b;
+         aux.agregarCerosDelante(len_first - len_b);
+         aux1=(*this);
+      }
+      else{
+         aux=(*this);
+         aux.agregarCerosDelante(len_b - len_first);
+         aux1=b;
+      }
+
+   int len_aux=aux.getNumero().length();
+   resultado.agregarCerosFinal(len_aux+1);
+
+   for(int i=len_aux-1; i>=0; i--){
+      x = aux.getNumero()[i] - '0';
+      y = aux1.getNumero()[i] - '0';
+
+      res = x + y + acarreo;
+      resultado.setNumero(i+1, res%10);
+
+      if(res>9){
+         acarreo=res/10;
+      }
+      else{
+         acarreo=0;
+      }
+   }
+
+	if(acarreo>0){
+      resultado.setNumero(0, acarreo);
+   }
+
+   resultado.quitarCerosNoSignificativos();
+	return resultado;
 }
