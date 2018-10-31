@@ -18,6 +18,6 @@ class Entero{
       void agregarCerosFinal(int nCeros);
       void agregarCerosDelante(int nCeros);
       void quitarCerosNoSignificativos();
-      void multiplicarPotencia10(int potencia);
+      std::string multiplicarPotencia10(int potencia);
 };
 #endif

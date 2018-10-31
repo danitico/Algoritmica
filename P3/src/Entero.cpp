@@ -17,29 +17,25 @@ void Entero::partirCadena(std::string & c1, std::string & c2){
 }
 void Entero::agregarCerosFinal(int nCeros){
 	int n, numeroCaracteres, i;
+	std::string aux=this->getNumero();
 
-	n=this->getNumero().length();
+	n=aux.length();
 	numeroCaracteres=n+nCeros;
 
 	for(i=n; i<numeroCaracteres; i++){//Se rellena con los ceros al final
-      this->getNumero().push_back('0');
+      aux.push_back('0');
    }
+	this->setNumero(aux);
 }
 void Entero::agregarCerosDelante(int nCeros){
-	int n, numeroCaracteres, i;
+	int n, i;
    std::string aux;
-	n=this->getNumero().length();
 
-	numeroCaracteres=n+nCeros;
-
-   for(int i=0; i<numeroCaracteres; i++){
-      if(i<nCeros){
-         aux.push_back('0');
-      }
-      else{
-         aux.push_back(this->getNumero()[i]);
-      }
+   for(int i=0; i<nCeros; i++){
+   	aux.push_back('0');
    }
+
+	aux.append(this->getNumero());
    this->setNumero(aux);
 }
 void Entero::quitarCerosNoSignificativos(){
@@ -54,6 +50,9 @@ void Entero::quitarCerosNoSignificativos(){
    this->setNumero(this->getNumero().substr(numeroCeros));
 }
 
-void Entero::multiplicarPotencia10(int potencia){
-	this->agregarCerosFinal(potencia);
+std::string Entero::multiplicarPotencia10(int potencia){
+	Entero aux(this->getNumero());
+
+	aux.agregarCerosFinal(potencia);
+	return aux.getNumero();
 }
