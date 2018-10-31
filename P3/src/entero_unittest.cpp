@@ -48,23 +48,24 @@ TEST(Entero, multiplicarPotencia10){
    EXPECT_EQ(a.multiplicarPotencia10(3), "25000");
 }
 TEST(Entero, Operadores){
-   Entero a("25"), b, c;
-   b=a;
+   Entero a("43787897989778978978978787878978954787654356789087654324567"), c;
+   c=a;
 
-   EXPECT_EQ(a.getNumero(), b.getNumero());
-   std::cout << "El número es: " << a << std::endl;
+   EXPECT_EQ(a.getNumero(), c.getNumero());
+   // std::cout << "El número es: " << a << std::endl;
 
    // el operador << va perfecto.
    // std::cin >> c;
    // EXPECT_EQ(c.getNumero(), "20");
-}
-TEST(Entero, Prueba){
-   Entero a("2578362845445115445455458484515456487845678976546789445656456788989898988");
-   Entero b("7645645565656478787894564545454548498754678907654678965467890765467897654");
+
+   Entero b("3456537898423236743289742398");
    Entero resultado;
 
-   resultado=a+b;
-   EXPECT_EQ(resultado.getNumero(), "10224008411101594233350023029970004986600357884201468411124347554457796642");
+   // resultado=a+b;
+   // EXPECT_EQ(resultado.getNumero(), "24");
+
+   resultado=a*b;
+   EXPECT_EQ(resultado.getNumero(), "151354528893961704825283038561660183275303663347354852745671378829223439161476112891666");
 }
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

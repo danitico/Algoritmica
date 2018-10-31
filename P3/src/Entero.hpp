@@ -27,5 +27,6 @@ class Entero{
       friend std::ostream & operator<<(std::ostream & stream, const Entero & a);
       friend std::istream & operator>>(std::istream & stream, Entero & a);
       Entero operator+(const Entero & b);
+      Entero operator*(const Entero & b);
 };
 #endif

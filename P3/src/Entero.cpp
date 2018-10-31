@@ -72,16 +72,16 @@ Entero Entero::operator+(const Entero & b){
    Entero resultado;
    int x, y, acarreo=0, res=0, len_first=this->getNumero().length(), len_b=b.getNumero().length();
 
-      if(len_first > len_b){
-         aux=b;
-         aux.agregarCerosDelante(len_first - len_b);
-         aux1=(*this);
-      }
-      else{
-         aux=(*this);
-         aux.agregarCerosDelante(len_b - len_first);
-         aux1=b;
-      }
+   if(len_first > len_b){
+      aux=b;
+      aux.agregarCerosDelante(len_first - len_b);
+      aux1=(*this);
+   }
+   else{
+      aux=(*this);
+      aux.agregarCerosDelante(len_b - len_first);
+      aux1=b;
+   }
 
    int len_aux=aux.getNumero().length();
    resultado.agregarCerosFinal(len_aux+1);
@@ -106,5 +106,39 @@ Entero Entero::operator+(const Entero & b){
    }
 
    resultado.quitarCerosNoSignificativos();
+	return resultado;
+}
+Entero Entero::operator*(const Entero & b){
+	Entero aux, aux1;
+   Entero resultado, parcial;
+   int x, y, acarreo=0, res=0, len_first=this->getNumero().length(), len_b=b.getNumero().length();
+
+   if(len_first > len_b){
+      aux=b;
+      aux1=(*this);
+   }
+   else{
+      aux=(*this);
+      aux1=b;
+   }
+
+	int len_aux=aux.getNumero().length();
+   resultado.agregarCerosFinal(len_first+len_b);
+	parcial.agregarCerosFinal(aux1.getNumero().length()+1);
+
+	int j=0;
+	int repeticiones=0;
+	for(int i=len_aux-1; i>=0; i--){
+		repeticiones=aux.getNumero()[i] - '0';
+		parcial=aux1;
+		for(int k=1; k<repeticiones; k++){
+			parcial = parcial + aux1;
+		}
+		parcial.agregarCerosFinal(j);
+		resultado = resultado + parcial;
+		j++;
+	}
+
+	resultado.quitarCerosNoSignificativos();
 	return resultado;
 }
