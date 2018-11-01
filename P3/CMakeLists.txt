@@ -5,5 +5,6 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set (PROJECT_SOURCE_DIR "./src/")
 SET(CMAKE_CXX_FLAGS "-g -lgcov --coverage")
 
+add_executable(practica3 ${PROJECT_SOURCE_DIR}main.cpp ${PROJECT_SOURCE_DIR}Entero.cpp)
 add_executable(testEntero ${PROJECT_SOURCE_DIR}entero_unittest.cpp ${PROJECT_SOURCE_DIR}Entero.cpp)
 target_link_libraries(testEntero ${GTEST_LIBRARIES} pthread)

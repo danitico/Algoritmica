@@ -67,6 +67,19 @@ TEST(Entero, Operadores){
    resultado=a*b;
    EXPECT_EQ(resultado.getNumero(), "151354528893961704825283038561660183275303663347354852745671378829223439161476112891666");
 }
+TEST(entero, Prueba){
+   Entero a("47810"), b("2");
+   std::string pipo1, pipo2, pipo3, pipo4;
+   a.partirCadena(pipo1, pipo2);
+
+   std::cout << pipo1 << '\n';
+   std::cout << pipo2 << '\n';
+
+   b.agregarCerosDelante(4);
+   b.partirCadena(pipo3, pipo4);
+   std::cout << pipo3 << '\n';
+   std::cout << pipo4 << '\n';
+}
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

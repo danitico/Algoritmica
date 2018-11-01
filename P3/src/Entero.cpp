@@ -42,7 +42,7 @@ void Entero::quitarCerosNoSignificativos(){
 	int l, i=0, numeroCeros=0;
 	l=this->getNumero().length();
 
-	while(this->getNumero()[i]=='0' && i<l){
+	while(this->getNumero()[i]=='0' && i<l-1){
 		i++;
 		numeroCeros++;
 	}
@@ -121,6 +121,11 @@ Entero Entero::operator*(const Entero & b){
       aux=(*this);
       aux1=b;
    }
+
+	if(aux.getNumero()=="0"){
+		resultado.agregarCerosFinal(1);
+		return resultado;
+	}
 
 	int len_aux=aux.getNumero().length();
    resultado.agregarCerosFinal(len_first+len_b);
