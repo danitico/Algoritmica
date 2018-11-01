@@ -1,4 +1,5 @@
 #include "Entero.hpp"
+#include "funciones.hpp"
 #include <gtest/gtest.h>
 TEST(Entero, Constructor){
    Entero a("5001");
@@ -12,18 +13,16 @@ TEST(Entero, Constructor){
 }
 TEST(Entero, partirCadena){
    Entero a("202030");
-   std::string b, c;
+   Entero b, c;
 
    a.partirCadena(b, c);
-   EXPECT_EQ(b, "202");
-   EXPECT_EQ(c, "030");
-
-   b=c="";
+   EXPECT_EQ(b.getNumero(), "202");
+   EXPECT_EQ(c.getNumero(), "030");
 
    Entero a1("2020301");
    a1.partirCadena(b, c);
-   EXPECT_EQ(b, "2020");
-   EXPECT_EQ(c, "301");
+   EXPECT_EQ(b.getNumero(), "2020");
+   EXPECT_EQ(c.getNumero(), "301");
 }
 TEST(Entero, agregarCerosFinal){
    Entero a("25");
@@ -45,40 +44,23 @@ TEST(Entero, quitarCerosNoSignificativos){
 }
 TEST(Entero, multiplicarPotencia10){
    Entero a("25");
-   EXPECT_EQ(a.multiplicarPotencia10(3), "25000");
+   Entero b("25000");
+   EXPECT_EQ(a.multiplicarPotencia10(3), b);
 }
 TEST(Entero, Operadores){
    Entero a("43787897989778978978978787878978954787654356789087654324567"), c;
-   c=a;
-
-   EXPECT_EQ(a.getNumero(), c.getNumero());
-   // std::cout << "El número es: " << a << std::endl;
-
-   // el operador << va perfecto.
-   // std::cin >> c;
-   // EXPECT_EQ(c.getNumero(), "20");
-
    Entero b("3456537898423236743289742398");
    Entero resultado;
+   c=a;
 
-   // resultado=a+b;
-   // EXPECT_EQ(resultado.getNumero(), "24");
+   EXPECT_EQ(a, c);
+   EXPECT_EQ(a==c, true);
 
    resultado=a*b;
    EXPECT_EQ(resultado.getNumero(), "151354528893961704825283038561660183275303663347354852745671378829223439161476112891666");
-}
-TEST(entero, Prueba){
-   Entero a("47810"), b("2");
-   std::string pipo1, pipo2, pipo3, pipo4;
-   a.partirCadena(pipo1, pipo2);
 
-   std::cout << pipo1 << '\n';
-   std::cout << pipo2 << '\n';
-
-   b.agregarCerosDelante(4);
-   b.partirCadena(pipo3, pipo4);
-   std::cout << pipo3 << '\n';
-   std::cout << pipo4 << '\n';
+   resultado=a+b;
+   EXPECT_EQ(resultado.getNumero(), "43787897989778978978978787878982411325552780025830944066965");
 }
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

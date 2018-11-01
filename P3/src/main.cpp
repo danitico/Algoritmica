@@ -1,10 +1,9 @@
 #include <iostream>
-#include "Entero.hpp"
+#include "funciones.hpp"
 #include "macros.hpp"
 int main(){
    int opcion=0;
    do{
-      Entero a, b, resultado;
       int posicion=2;
       std::cout << CLEAR_SCREEN;
       PLACE(1, 10);
@@ -31,24 +30,10 @@ int main(){
       PLACE(3, 1);
       switch(opcion){
          case 1:
-            std::cout << BIPURPLE << "Introduzca el primer operando: " << RESET;
-            std::cin >> a;
-            std::cout << BIPURPLE << "Introduzca el segundo operando: " << RESET;
-            std::cin >> b;
-
-            resultado=a+b;
-            std::cout << BIBLUE << "El resultado es: " << RESET << resultado << std::endl;
-            std::cin.ignore();
+            Suma();
             break;
          case 2:
-            std::cout << BIPURPLE << "Introduzca el primer operando: " << RESET;
-            std::cin >> a;
-            std::cout << BIPURPLE << "Introduzca el segundo operando: " << RESET;
-            std::cin >> b;
-
-            resultado=a*b;
-            std::cout << BIBLUE << "El resultado es: " << RESET << resultado << std::endl;
-            std::cin.ignore();
+            Multiplicacion();
             break;
          case 3:
             std::cout << INVERSE;

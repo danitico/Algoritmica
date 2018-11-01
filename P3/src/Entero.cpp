@@ -1,6 +1,7 @@
 #include "Entero.hpp"
-void Entero::partirCadena(std::string & c1, std::string & c2){
-	int n, n1, n2, i;
+void Entero::partirCadena(Entero & a, Entero & b){
+	int n, n1, n2;
+	std::string c1, c2;
 	n=this->getNumero().length();
 
 	if(n%2==0){//n es par
@@ -14,6 +15,9 @@ void Entero::partirCadena(std::string & c1, std::string & c2){
 
    c1=this->getNumero().substr(0, n1);
    c2=this->getNumero().substr(n1);
+
+	a.setNumero(c1);
+	b.setNumero(c2);
 }
 void Entero::agregarCerosFinal(int nCeros){
 	int n, numeroCaracteres, i;
@@ -50,11 +54,11 @@ void Entero::quitarCerosNoSignificativos(){
    this->setNumero(this->getNumero().substr(numeroCeros));
 }
 
-std::string Entero::multiplicarPotencia10(int potencia){
+Entero Entero::multiplicarPotencia10(int potencia){
 	Entero aux(this->getNumero());
 
 	aux.agregarCerosFinal(potencia);
-	return aux.getNumero();
+	return aux;
 }
 void Entero::operator=(const Entero & entero){
 	this->setNumero(entero.getNumero());
@@ -146,4 +150,12 @@ Entero Entero::operator*(const Entero & b){
 
 	resultado.quitarCerosNoSignificativos();
 	return resultado;
+}
+bool Entero::operator==(const Entero & b) const{
+	if(getNumero()==b.getNumero()){
+		return true;
+	}
+	else{
+		return false;
+	}
 }
