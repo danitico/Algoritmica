@@ -1,4 +1,6 @@
 #include "Entero.hpp"
+#include "macros.hpp"
+#include "funciones.hpp"
 void Entero::partirCadena(Entero & a, Entero & b){
 	int n, n1, n2;
 	std::string c1, c2;
@@ -112,44 +114,56 @@ Entero Entero::operator+(const Entero & b){
    resultado.quitarCerosNoSignificativos();
 	return resultado;
 }
+// Entero Entero::operator*(const Entero & b){
+// 	Entero aux, aux1;
+//    Entero resultado, parcial;
+//    int x, y, acarreo=0, res=0, len_first=this->getNumero().length(), len_b=b.getNumero().length();
+//
+//    if(len_first > len_b){
+//       aux=b;
+//       aux1=(*this);
+//    }
+//    else{
+//       aux=(*this);
+//       aux1=b;
+//    }
+//
+// 	if(aux.getNumero()=="0"){
+// 		resultado.agregarCerosFinal(1);
+// 		return resultado;
+// 	}
+//
+// 	int len_aux=aux.getNumero().length();
+//    resultado.agregarCerosFinal(len_first+len_b);
+// 	parcial.agregarCerosFinal(aux1.getNumero().length()+1);
+//
+// 	int j=0;
+// 	int repeticiones=0;
+// 	for(int i=len_aux-1; i>=0; i--){
+// 		repeticiones=aux.getNumero()[i] - '0';
+// 		parcial=aux1;
+// 		for(int k=1; k<repeticiones; k++){
+// 			parcial = parcial + aux1;
+// 		}
+// 		parcial.agregarCerosFinal(j);
+// 		resultado = resultado + parcial;
+// 		j++;
+// 	}
+//
+// 	resultado.quitarCerosNoSignificativos();
+// 	return resultado;
+// }
 Entero Entero::operator*(const Entero & b){
-	Entero aux, aux1;
-   Entero resultado, parcial;
-   int x, y, acarreo=0, res=0, len_first=this->getNumero().length(), len_b=b.getNumero().length();
+	int n=0;
+	std::cout << BIPURPLE << "Número máximo de dígitos para multiplicación directa: " << RESET;
+	std::cin >> n;
 
-   if(len_first > len_b){
-      aux=b;
-      aux1=(*this);
-   }
-   else{
-      aux=(*this);
-      aux1=b;
-   }
+	//Debido al limite de los enteros. Multiplicar por si mismo el numero mas grande con 4 cifras
+	//no supera el límite. Pero con 5 cifras sí, por lo que se limita a 4
+	if(n>4)
+		n=4;
 
-	if(aux.getNumero()=="0"){
-		resultado.agregarCerosFinal(1);
-		return resultado;
-	}
-
-	int len_aux=aux.getNumero().length();
-   resultado.agregarCerosFinal(len_first+len_b);
-	parcial.agregarCerosFinal(aux1.getNumero().length()+1);
-
-	int j=0;
-	int repeticiones=0;
-	for(int i=len_aux-1; i>=0; i--){
-		repeticiones=aux.getNumero()[i] - '0';
-		parcial=aux1;
-		for(int k=1; k<repeticiones; k++){
-			parcial = parcial + aux1;
-		}
-		parcial.agregarCerosFinal(j);
-		resultado = resultado + parcial;
-		j++;
-	}
-
-	resultado.quitarCerosNoSignificativos();
-	return resultado;
+	return MultiplicacionNumerosGrandes(*this, b, n);
 }
 bool Entero::operator==(const Entero & b) const{
 	if(getNumero()==b.getNumero()){

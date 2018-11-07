@@ -14,16 +14,14 @@ void Suma(){
 }
 void Multiplicacion(){
    Entero a, b, resultado;
-   int n;
 
    std::cout << BIPURPLE << "Introduzca el primer operando: " << RESET;
    std::cin >> a;
    std::cout << BIPURPLE << "Introduzca el segundo operando: " << RESET;
    std::cin >> b;
-   std::cout << BIPURPLE << "Número máximo de dígitos para multiplicación directa: " << RESET;
-   std::cin >> n;
 
-   std::cout << BIBLUE << "El resultado es: " << RESET << MultiplicacionNumerosGrandes(a, b, n) << std::endl;
+   resultado=a*b;
+   std::cout << BIBLUE << "El resultado es: " << RESET << resultado << std::endl;
    std::cin.ignore();
 }
 Entero MultiplicacionNumerosGrandes(Entero u, Entero v, int n){
@@ -31,7 +29,8 @@ Entero MultiplicacionNumerosGrandes(Entero u, Entero v, int n){
 
    (len_u > len_v) ? grande=len_u : grande=len_v;
    if(grande <= n){
-      return u*v;
+      int res=stoi(u.getNumero()) * stoi(v.getNumero());
+      return Entero(std::to_string(res));
    }
    else{
       Entero w, x, y, z;

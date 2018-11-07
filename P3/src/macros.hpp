@@ -1,8 +1,8 @@
 /*!
   \file   macros.hpp
   \brief  Macros for the screen
-  \author 
-  \date   
+  \author
+  \date
   \note  http://isthe.com/chongo/tech/comp/ansi_escapes.html
 */
 
@@ -11,10 +11,10 @@
 #define _MACROS_HPP_ //!< Macros for the screen
 
 
-#ifndef DOXYGEN_SHOULD_SKIP_THIS 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 #define DOXYGEN_SHOULD_SKIP_THIS //!< Prevent doxygen from processing this file several times
 
-#include <stdio.h>
+#include <cstdio>
 
 #define PLACE(x,y)   printf("\033[%d;%dH",x,y) //!< Place
 
@@ -108,4 +108,3 @@
 
 
 #endif  // _MACROS_HPP_
-
