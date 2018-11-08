@@ -2,6 +2,7 @@
 P1/build/
 P2/build/
 P3/build/
+P4/build/
 *.exe
-P1/RanchalParrado.tar.xz
-P2/RanchalParrado.zip
+*.tar.xz
+*.zip
