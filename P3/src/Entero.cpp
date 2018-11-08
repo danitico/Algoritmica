@@ -114,6 +114,26 @@ Entero Entero::operator+(const Entero & b){
    resultado.quitarCerosNoSignificativos();
 	return resultado;
 }
+Entero Entero::operator*(const Entero & b){
+	int n=0;
+	std::cout << BIPURPLE << "Número máximo de dígitos para multiplicación directa: " << RESET;
+	std::cin >> n;
+
+	//Debido al limite de los enteros. Multiplicar por si mismo el numero mas grande con 4 cifras
+	//no supera el límite. Pero con 5 cifras sí, por lo que se limita a 4
+	if(n>4)
+		n=4;
+
+	return MultiplicacionNumerosGrandes(*this, b, n);
+}
+bool Entero::operator==(const Entero & b) const{
+	if(getNumero()==b.getNumero()){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 // Entero Entero::operator*(const Entero & b){
 // 	Entero aux, aux1;
 //    Entero resultado, parcial;
@@ -153,23 +173,3 @@ Entero Entero::operator+(const Entero & b){
 // 	resultado.quitarCerosNoSignificativos();
 // 	return resultado;
 // }
-Entero Entero::operator*(const Entero & b){
-	int n=0;
-	std::cout << BIPURPLE << "Número máximo de dígitos para multiplicación directa: " << RESET;
-	std::cin >> n;
-
-	//Debido al limite de los enteros. Multiplicar por si mismo el numero mas grande con 4 cifras
-	//no supera el límite. Pero con 5 cifras sí, por lo que se limita a 4
-	if(n>4)
-		n=4;
-
-	return MultiplicacionNumerosGrandes(*this, b, n);
-}
-bool Entero::operator==(const Entero & b) const{
-	if(getNumero()==b.getNumero()){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
