@@ -1,5 +1,6 @@
 #ifndef MATERIAL_HPP
 #define MATERIAL_HPP
+#include <iostream>
 class Material{
    private:
       int etiqueta_, volumen_, precio_;
@@ -11,30 +12,31 @@ class Material{
          this->setPrecio(precio);
          this->setDisponible(disponible);
       }
-      inline int getEtiqueta(){
+      inline int getEtiqueta() const{
          return etiqueta_;
       }
       inline void setEtiqueta(int etiqueta){
          etiqueta_=etiqueta;
       }
-      inline int getVolumen(){
+      inline int getVolumen() const{
          return volumen_;
       }
       inline void setVolumen(int volumen){
          volumen_=volumen;
       }
-      inline int getPrecio(){
+      inline int getPrecio() const{
          return precio_;
       }
       inline void setPrecio(int precio){
          precio_=precio;
       }
-      inline bool getDisponible(){
+      inline bool getDisponible() const{
          return disponible_;
       }
       inline void setDisponible(bool disponible){
          disponible_=disponible;
       }
-      int getTotal();
+      int getTotal() const;
+      friend std::ostream & operator<<(std::ostream & stream, const Material & a);
 };
 #endif

@@ -14,13 +14,12 @@ class Datos{
       Datos(int volumenMochila=0, std::string fichero_datos=""){
          this->setVolumenMochila(volumenMochila);
          this->setMateriales(fichero_datos);
-         this->ordenarMateriales();
       }
-      inline std::vector<Material> getMateriales(){
+      inline std::vector<Material> getMateriales() const{
          return materiales_;
       }
       void setMateriales(std::string fichero_datos);
-      inline int getVolumenMochila(){
+      inline int getVolumenMochila() const{
          return volumenMochila_;
       }
       inline void setVolumenMochila(int volumenMochila){

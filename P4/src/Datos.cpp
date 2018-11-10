@@ -19,6 +19,7 @@ void Datos::setMateriales(std::string fichero_datos){
          materiales_.push_back(Material(etiqueta, volumen, precio, true));
       }
       f.close();
+      ordenarMateriales();
    }
    else{
       materiales_.resize(0);
