@@ -30,3 +30,7 @@ void Datos::ordenarMateriales(){
       std::sort(materiales_.begin(), materiales_.end(), ordenacionAscendente);
    }
 }
+void Datos::operator=(const Datos & a){
+   this->setMateriales(a.getMateriales());
+   this->setVolumenMochila(a.getVolumenMochila());
+}
