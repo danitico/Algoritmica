@@ -38,5 +38,7 @@ class Material{
       }
       int getTotal() const;
       friend std::ostream & operator<<(std::ostream & stream, const Material & a);
+      void operator=(const Material & a);
+      bool operator==(const Material & b) const;
 };
 #endif

@@ -27,5 +27,6 @@ class Datos{
          volumenMochila_=volumenMochila;
       }
       void operator=(const Datos & a);
+      bool operator==(const Datos & b) const;
 };
 #endif

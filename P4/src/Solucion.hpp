@@ -9,7 +9,7 @@ class Solucion{
       Solucion(){
          utilizados_.resize(0);
       }
-      inline std::vector<Material> getUtilizados(){
+      inline std::vector<Material> getUtilizados() const{
          return utilizados_;
       }
       inline Datos getDatos(){
@@ -18,5 +18,7 @@ class Solucion{
       inline void setDatos(Datos datos){
          datos_=datos;
       }
+      void Mochila();
+      friend std::ostream & operator<<(std::ostream & stream, const Solucion & a);
 };
 #endif
