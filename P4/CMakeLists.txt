@@ -6,17 +6,17 @@ set (PROJECT_SOURCE_DIR "./src/")
 SET(CMAKE_CXX_FLAGS "-g -lgcov --coverage")
 
 # add_executable(practica3 ${PROJECT_SOURCE_DIR}main.cpp ${PROJECT_SOURCE_DIR}Entero.cpp ${PROJECT_SOURCE_DIR}funciones.cpp)
-add_executable(testMaterial ${PROJECT_SOURCE_DIR}material_unittest.cpp
-                            ${PROJECT_SOURCE_DIR}Material.cpp)
+add_executable(testMaterial ${PROJECT_SOURCE_DIR}opcion-B/material_unittest.cpp
+                            ${PROJECT_SOURCE_DIR}opcion-B/Material.cpp)
 target_link_libraries(testMaterial ${GTEST_LIBRARIES} pthread)
 
-add_executable(testDatos ${PROJECT_SOURCE_DIR}datos_unittest.cpp
-                         ${PROJECT_SOURCE_DIR}Material.cpp
-                         ${PROJECT_SOURCE_DIR}Datos.cpp)
+add_executable(testDatos ${PROJECT_SOURCE_DIR}opcion-B/datos_unittest.cpp
+                         ${PROJECT_SOURCE_DIR}opcion-B/Material.cpp
+                         ${PROJECT_SOURCE_DIR}opcion-B/Datos.cpp)
 target_link_libraries(testDatos ${GTEST_LIBRARIES} pthread)
 
-add_executable(testSolucion ${PROJECT_SOURCE_DIR}solucion_unittest.cpp
-                            ${PROJECT_SOURCE_DIR}Material.cpp
-                            ${PROJECT_SOURCE_DIR}Datos.cpp
-                            ${PROJECT_SOURCE_DIR}Solucion.cpp)
+add_executable(testSolucion ${PROJECT_SOURCE_DIR}opcion-B/solucion_unittest.cpp
+                            ${PROJECT_SOURCE_DIR}opcion-B/Material.cpp
+                            ${PROJECT_SOURCE_DIR}opcion-B/Datos.cpp
+                            ${PROJECT_SOURCE_DIR}opcion-B/Solucion.cpp)
 target_link_libraries(testSolucion ${GTEST_LIBRARIES} pthread)

@@ -6,14 +6,14 @@ TEST(Solucion, Constructor){
 }
 TEST(Solucion, GettersAndSetters){
    Solucion a;
-   Datos datos(20, "../src/materiales.txt");
+   Datos datos(20, "../src/opcion-B/materiales.txt");
 
    a.setDatos(datos);
    EXPECT_EQ(a.getDatos(), datos);
 }
 TEST(Solucion, mochila){
    Solucion a;
-   Datos datos(86, "../src/materiales.txt");
+   Datos datos(86, "../src/opcion-B/materiales.txt");
    a.setDatos(datos);
 
    a.Mochila();

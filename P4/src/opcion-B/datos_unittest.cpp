@@ -5,7 +5,7 @@ TEST(Material, Constructor){
    EXPECT_EQ(a.getVolumenMochila(), 0);
    EXPECT_EQ(a.getMateriales().size(), 0);
 
-   Datos b(30, "../src/materiales.txt");
+   Datos b(30, "../src/opcion-B/materiales.txt");
    EXPECT_EQ(b.getVolumenMochila(), 30);
    EXPECT_NE(b.getMateriales().size(), 0);
 }
@@ -15,7 +15,7 @@ TEST(Material, GettersAndSetters){
    a.setVolumenMochila(10);
    EXPECT_EQ(a.getVolumenMochila(), 10);
 
-   a.setMateriales("../src/materiales.txt");
+   a.setMateriales("../src/opcion-B/materiales.txt");
    materiales = a.getMateriales();
    for(int i=0; i<materiales.size() - 1; i++){
       EXPECT_EQ(materiales[i].getPrecio() >= materiales[i+1].getPrecio(), true);
@@ -23,7 +23,7 @@ TEST(Material, GettersAndSetters){
    EXPECT_EQ(a.getMateriales().size(), 5);
 }
 TEST(Material, ordenacion){
-   Datos a(30, "../src/materiales.txt");
+   Datos a(30, "../src/opcion-B/materiales.txt");
    std::vector<Material> materiales;
 
    materiales = a.getMateriales();
