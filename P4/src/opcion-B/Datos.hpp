@@ -28,5 +28,6 @@ class Datos{
       }
       void operator=(const Datos & a);
       bool operator==(const Datos & b) const;
+      friend std::istream & operator>>(std::istream & stream, Datos & a);
 };
 #endif

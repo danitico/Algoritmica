@@ -1,4 +1,4 @@
-#include "Material.hpp"
+#include "../Material.hpp"
 #include <gtest/gtest.h>
 TEST(Material, Constructor){
    Material a;

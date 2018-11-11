@@ -1,12 +1,13 @@
 #include "Material.hpp"
+#include "../macros.hpp"
 int Material::getTotal() const{
    return this->getVolumen() * this->getPrecio();
 }
 std::ostream & operator<<(std::ostream & stream, const Material & a){
-   stream << "Etiqueta: " << a.getEtiqueta() \
-             << " Volumen: " << a.getVolumen()  \
-             << " Precio: "  << a.getPrecio()   \
-             << " Total: "   << a.getTotal();
+   stream << BIBLUE << "Etiqueta: " << RESET << BIRED << UNDERLINE << a.getEtiqueta() << RESET \
+          << BIBLUE << " Volumen: " << RESET << BIRED << UNDERLINE << a.getVolumen()  << RESET \
+          << BIBLUE << " Precio: "  << RESET << BIRED << UNDERLINE << a.getPrecio()   << RESET \
+          << BIBLUE << " Total: "   << RESET << BIRED << UNDERLINE << a.getTotal()    << RESET;
    return stream;
 }
 void Material::operator=(const Material & a){

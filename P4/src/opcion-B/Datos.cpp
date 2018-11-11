@@ -1,6 +1,7 @@
 #include "Datos.hpp"
 #include <fstream>
 #include <algorithm>
+#include "../macros.hpp"
 void Datos::setMateriales(std::string fichero_datos){
    std::ifstream f(fichero_datos.c_str());
    if(f.is_open()){
@@ -41,4 +42,16 @@ bool Datos::operator==(const Datos & b) const{
    else{
       return false;
    }
+}
+std::istream & operator>>(std::istream & stream, Datos & a){
+   std::string fichero;
+
+   std::cout << BIPURPLE << "Introduzca el fichero con los datos de los materiales: " << RESET;
+   stream >> fichero;
+   a.setMateriales(fichero);
+
+   std::cout << BIPURPLE << "Introduzca el tamaño de la mochila: " << RESET;
+   stream >> a.volumenMochila_;
+
+   return stream;
 }

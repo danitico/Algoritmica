@@ -1,4 +1,5 @@
 #include "Solucion.hpp"
+#include "../macros.hpp"
 void Solucion::Mochila(){
    if(this->getDatos().getMateriales().size()!=0){
       int resto = this->getDatos().getVolumenMochila();
@@ -32,14 +33,18 @@ void Solucion::Mochila(){
 }
 std::ostream & operator<<(std::ostream & stream, const Solucion & a){
    if(a.getUtilizados().size() > 0){
-      stream << "UTILIZADOS" << std::endl;
-      stream << "----------" << std::endl;
+      int precioTotal=0;
+      stream << BIBLUE << "\t\tUTILIZADOS" << RESET << std::endl;
+      stream << BIBLUE << "\t\t----------" << RESET << std::endl;
       for(int i=0; i<a.getUtilizados().size(); i++){
+         precioTotal+=a.getUtilizados()[i].getTotal();
          stream << a.getUtilizados()[i] << std::endl;
       }
+      stream << std::endl << BIBLUE << "Precio total de la mochila: " << RESET
+             << BIRED << UNDERLINE << precioTotal  << RESET << std::endl;
    }
    else{
-      stream << "No se ha utilizado ninguno" << std::endl;
+      stream << BIRED << "No se ha utilizado ninguno" << RESET << std::endl;
    }
 
    return stream;

@@ -1,4 +1,4 @@
-#include "Solucion.hpp"
+#include "../Solucion.hpp"
 #include <gtest/gtest.h>
 TEST(Solucion, Constructor){
    Solucion a;
