@@ -1,11 +1,5 @@
-/*!
-   \file Edge.cpp
-   \brief Fichero de la clase Edge
-   \author Daniel Ranchal Parrado
-   \date
-*/
 #include "Edge.hpp"
-bool ed::Edge::has(ed::Vertex const & u) const{
+bool Edge::has(Vertex const & u) const{
    if(u==first() || u==second()){
       return true;
    }
@@ -13,7 +7,7 @@ bool ed::Edge::has(ed::Vertex const & u) const{
       return false;
    }
 }
-ed::Vertex ed::Edge::other(ed::Vertex const & u) const{
+Vertex Edge::other(Vertex const & u) const{
    if(u==first()){
       return second();
    }
@@ -23,7 +17,7 @@ ed::Vertex ed::Edge::other(ed::Vertex const & u) const{
       }
    }
 }
-bool ed::Edge::operator<(Edge const & lado){
+bool Edge::operator<(Edge const & lado){
    if(this->getData() < lado.getData()){
       return true;
    }
@@ -31,10 +25,9 @@ bool ed::Edge::operator<(Edge const & lado){
       return false;
    }
 }
-ed::Edge & ed::Edge::operator=(ed::Edge const & lado){
+Edge & Edge::operator=(Edge const & lado){
    this->setFirstVertex(lado.first());
    this->setSecondVertex(lado.second());
    this->setData(lado.getData());
-
    return *this;
 }
