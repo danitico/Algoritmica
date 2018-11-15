@@ -20,12 +20,24 @@ class Graph{
          currentEdge_=-1;
          etiquetas_=0;
       }
-      inline std::vector<Vertex> getVertexVector() const{return vertexes_;}
-      inline std::vector<Edge> getEdgeVector() const{return edges_;}
-      inline std::vector<std::vector<int> > getMatrix() const{return matrix_;}
-      inline int getCurrentVertex() const{return currentVertex_;}
-      inline int getCurrentEdge() const{return currentEdge_;}
-      inline int getEtiquetas() const{return etiquetas_;}
+      inline std::vector<Vertex> getVertexVector() const{
+         return vertexes_;
+      }
+      inline std::vector<Edge> getEdgeVector() const{
+         return edges_;
+      }
+      inline std::vector<std::vector<int> > getMatrix() const{
+         return matrix_;
+      }
+      inline int getCurrentVertex() const{
+         return currentVertex_;
+      }
+      inline int getCurrentEdge() const{
+         return currentEdge_;
+      }
+      inline int getEtiquetas() const{
+         return etiquetas_;
+      }
       bool isEmpty() const;
       bool isDirected() const;
       bool adjacent(Vertex u, Vertex v) const;
@@ -35,7 +47,7 @@ class Graph{
       Edge currEdge() const;
       void setEdgeVector(int x, Edge & a);
       void setMatrix(int x, int y, int data);
-      void addVertex(Punto p);
+      void addVertex(std::string nombre);
       void addEdge(Vertex const & u, Vertex const & v, float distancia);
       void removeVertex();
       void removeEdge();
