@@ -25,3 +25,9 @@ add_executable(testSolucion ${PROJECT_SOURCE_DIR}opcion-B/tests/solucion_unittes
                             ${PROJECT_SOURCE_DIR}opcion-B/Datos.cpp
                             ${PROJECT_SOURCE_DIR}opcion-B/Solucion.cpp)
 target_link_libraries(testSolucion ${GTEST_LIBRARIES} pthread)
+add_executable(testGrafo ${PROJECT_SOURCE_DIR}opcion-C/test/grafo_unittest.cpp
+                         ${PROJECT_SOURCE_DIR}opcion-C/Edge.cpp
+                         ${PROJECT_SOURCE_DIR}opcion-C/funcionesAuxiliares.cpp
+                         ${PROJECT_SOURCE_DIR}opcion-C/Vertex.cpp
+                         ${PROJECT_SOURCE_DIR}opcion-C/Graph.cpp)
+target_link_libraries(testGrafo ${GTEST_LIBRARIES} pthread)

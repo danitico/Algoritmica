@@ -8,6 +8,7 @@ class Graph{
       std::vector<Vertex> vertexes_;
       std::vector<Edge> edges_;
       std::vector<std::vector<int> > matrix_;
+      std::vector<std::vector<int> > matrix1_;
       int currentVertex_;
       int currentEdge_;
       int etiquetas_;
@@ -16,6 +17,7 @@ class Graph{
          vertexes_.resize(0);
          edges_.resize(0);
          matrix_.resize(0);
+         matrix1_.resize(0);
          currentVertex_=-1;
          currentEdge_=-1;
          etiquetas_=0;
@@ -28,6 +30,9 @@ class Graph{
       }
       inline std::vector<std::vector<int> > getMatrix() const{
          return matrix_;
+      }
+      inline std::vector<std::vector<int> > getMatrix1() const{
+         return matrix1_;
       }
       inline int getCurrentVertex() const{
          return currentVertex_;
@@ -47,10 +52,9 @@ class Graph{
       Edge currEdge() const;
       void setEdgeVector(int x, Edge & a);
       void setMatrix(int x, int y, int data);
+      void setMatrix1(int x, int y, int data);
       void addVertex(std::string nombre);
       void addEdge(Vertex const & u, Vertex const & v, float distancia);
-      void removeVertex();
-      void removeEdge();
       void gotoVertex(Vertex const & v);
       void gotoEdge(Vertex const & u, Vertex const & v);
       void goToFirstVertex();

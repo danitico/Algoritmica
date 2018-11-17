@@ -1,72 +1,74 @@
-/*!
-   \file funcionesAuxiliares.cpp
-   \brief Funciones auxiliares
-   \author Daniel Ranchal Parrado
-   \date
-*/
 #include "funcionesAuxiliares.hpp"
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <cfloat>
 #include <algorithm>
-#include "macros.hpp"
-void ed::cargarVertices(ed::Graph & grafo, std::string fichero){
-   std::ifstream archivo(fichero.c_str());
+#include "../macros.hpp"
+void cargarVertices(Graph & grafo, std::string fichero1, std::string fichero2){
+   std::ifstream archivo1(fichero1.c_str());
+   std::ifstream archivo2(fichero2.c_str());
 
-   if(!archivo.is_open()){
-      std::cin.ignore();
-      std::cout<<BIRED<<"Error al abrir el fichero"<<RESET<<std::endl;
+   if(!archivo1.is_open() || !archivo2.is_open()){
+      std::cout<<BIRED<<"Error al abrir los fichero"<<RESET<<std::endl;
    }
    else{
       if(grafo.getVertexVector().size()==0){
          std::string stream;
-         ed::Punto a;
-
-         while(getline(archivo, stream, ' ')){
-            a.setX(atof(stream.c_str()));
-
-            getline(archivo, stream, '\n');
-            a.setY(atof(stream.c_str()));
-
-            grafo.addVertex(a);
+         while(getline(archivo1, stream, '\n')){
+            grafo.addVertex(stream);
          }
-         archivo.close();
+         archivo1.close();
+
+         getline(archivo2, stream, '\n');
+         getline(archivo2, stream, '\n');
+         int indicex=0, indicey;
+         while(getline(archivo2, stream, ' ')){
+            indicey=0;
+            grafo.setMatrix1(indicex, indicey, atoi(stream.c_str()));
+
+            indicey++;
+            for(int i=0; i < grafo.getVertexVector().size() - 2; i++){
+               getline(archivo2, stream, ' ');
+               grafo.setMatrix1(indicex, indicey, atoi(stream.c_str()));
+               indicey++;
+            }
+
+            getline(archivo2, stream, '\n');
+            grafo.setMatrix1(indicex, indicey, atoi(stream.c_str()));
+            indicex++;
+         }
+         archivo2.close();
 
          for(int i=0; i<grafo.getVertexVector().size(); i++){
             for(int j=i+1; j<grafo.getVertexVector().size(); j++){
-               grafo.addEdge(grafo.getVertexVector()[i], grafo.getVertexVector()[j], ed::distancia(grafo.getVertexVector()[i].getData(), grafo.getVertexVector()[j].getData()));
-               grafo.setMatrix(grafo.getVertexVector()[j].getLabel(), grafo.getVertexVector()[i].getLabel(), grafo.getMatrix()[grafo.getVertexVector()[i].getLabel()][grafo.getVertexVector()[j].getLabel()]);
+               grafo.addEdge(grafo.getVertexVector()[i], grafo.getVertexVector()[j], grafo.getMatrix1()[i][j]);
+               grafo.setMatrix(grafo.getVertexVector()[j].getLabel(), grafo.getVertexVector()[i].getLabel(), grafo.getMatrix()[i][j]);
             }
          }
-         std::cin.ignore();
          std::cout<<BIGREEN<<"Fichero cargado con éxito"<<RESET<<std::endl;
       }
       else{
-         std::cin.ignore();
          std::cout << BIRED << "El grafo ya tiene datos. Tiene que borrarlo pra cargar uno nuevo" << RESET <<std::endl;
       }
    }
 }
-void ed::mostrarGrafo(ed::Graph & grafo){
+void mostrarGrafo(Graph & grafo){
    if(grafo.getVertexVector().size()>0){
       std::cout << BIBLUE << "Los vértices del grafo son:" << RESET <<'\n';
       std::cout <<BIYELLOW<< "ETIQUETA" << RESET << BICYAN <<"\tPOSICION" << RESET <<std::endl;
       for(int i=0; i<grafo.getVertexVector().size(); i++){
-         std::cout << BIYELLOW << grafo.getVertexVector()[i].getLabel() << RESET << BICYAN <<"\t\t";
-         grafo.getVertexVector()[i].getData().escribirPunto();
-         std::cout<<std::endl;
+         std::cout << BIYELLOW << grafo.getVertexVector()[i].getLabel() << RESET << BICYAN <<"\t\t"<<grafo.getVertexVector()[i].getNombre()<<std::endl;
       }
 
       std::cout <<std::endl<<BIYELLOW<< "1º Vértice" << RESET << BICYAN <<"\t2º Vértice\t" << RESET << BIBLUE << "Coste" << RESET <<std::endl;
       for(int j=0; j<grafo.getEdgeVector().size(); j++){
-         std::cout << BIYELLOW;
-         grafo.getEdgeVector()[j].first().getData().escribirPunto();
-         std::cout << RESET << "\t\t";
-         std::cout << BICYAN;
-         grafo.getEdgeVector()[j].second().getData().escribirPunto();
-         std::cout << RESET << "\t\t";
-         std::cout << BIBLUE << grafo.getEdgeVector()[j].getData() << RESET << std::endl;
+         std::cout << BIYELLOW << grafo.getEdgeVector()[j].first().getNombre() << RESET;
+         std::cout << "\t\t";
+         std::cout << BICYAN << grafo.getEdgeVector()[j].second().getNombre() << RESET << std::flush;
+         std::cout << "\t\t";
+         std::cout << BIBLUE << grafo.getEdgeVector()[j].getData() << RESET;
+         std::cout << std::endl;
       }
 
       std::cout<<std::endl<<BIBLUE<<UNDERLINE<<"Matriz de adyacencias"<<RESET<<std::endl;
@@ -86,121 +88,10 @@ void ed::mostrarGrafo(ed::Graph & grafo){
       std::cout << BIRED << "El grafo está vacio" << RESET <<std::endl;
    }
 }
-void ed::borrarGrafo(ed::Graph & grafo){
-   if(grafo.isEmpty()){
-      std::cout << BIRED <<"El grafo esta vacío"<< RESET <<std::endl;
-   }
-   else{
-      grafo.goToFirstVertex();
-      while(grafo.hasCurrVertex()){
-         grafo.removeVertex();
-      }
-      std::cout << BIGREEN << "Grafo borrado correctamente" << RESET << std::endl;
-   }
-}
-void ed::BorrarVertice(ed::Graph & grafo, ed::Vertex a){
-   grafo.gotoVertex(a);
-
-   if(grafo.getCurrentVertex()==-1){
-      std::cin.ignore();
-      std::cout << BIRED << "El vértice no se encuentra en el grafo, por lo que no se puede borrar" << RESET <<std::endl;
-   }
-   else{
-      grafo.removeVertex();
-      std::cin.ignore();
-      std::cout << BIGREEN << "El vértice se ha borrado correctamente" << RESET <<std::endl;
-   }
-}
-void ed::borrarLado(ed::Graph & grafo, ed::Vertex a, ed::Vertex b){
-   grafo.gotoVertex(a);
-   if(grafo.getCurrentVertex()==-1){
-      std::cin.ignore();
-      std::cout << BIRED << "El vértice origen no se encuentra en el grafo" << RESET << std::endl;
-   }
-   else{
-      grafo.gotoVertex(b);
-      if(grafo.getCurrentVertex()==-1){
-         std::cin.ignore();
-         std::cout << BIRED << "El vértice destino no se encuentra en el grafo" << RESET << std::endl;
-      }
-      else{
-         grafo.gotoEdge(a, b);
-         if(grafo.getCurrentEdge()==-1){
-            std::cin.ignore();
-            std::cout << BIRED << "Esos dos vértices no están conectados" << RESET << std::endl;
-         }
-         else{
-            grafo.removeEdge();
-            std::cin.ignore();
-            std::cout << BIGREEN << "Conexión borrada correctamente" << RESET <<std::endl;
-         }
-      }
-   }
-}
-void ed::modificarCosteConexion(ed::Graph & grafo, ed::Vertex a, ed::Vertex b){
-   grafo.gotoVertex(a);
-   if(grafo.getCurrentVertex()==-1){
-      std::cin.ignore();
-      std::cout << BIRED << "El vértice origen no se encuentra en el grafo" << RESET << std::endl;
-   }
-   else{
-      grafo.gotoVertex(b);
-      if(grafo.getCurrentVertex()==-1){
-         std::cin.ignore();
-         std::cout << BIRED << "El vértice destino no se encuentra en el grafo" << RESET << std::endl;
-      }
-      else{
-         grafo.gotoEdge(a, b);
-         if(grafo.getCurrentEdge()==-1){
-            std::cin.ignore();
-            std::cout << BIRED << "Esos dos vértices no están conectados" << RESET << std::endl;
-         }
-         else{
-            int coste=0;
-            Edge c;
-            std::cout << BIBLUE << "El coste actual de lado es " <<RESET <<UNDERLINE<<grafo.currEdge().getData()<<RESET<<std::endl;
-            std::cout<<BIPURPLE<<"Introduzca el nuevo peso: "<<RESET;
-            std::cin >> coste;
-
-            if(coste!=grafo.currEdge().getData()){
-               c=grafo.currEdge();
-               c.setData(coste);
-               //grafo.getEdgeVector()[grafo.getCurrentEdge()]=c;
-               grafo.setEdgeVector(grafo.getCurrentEdge(), c);
-               std::cin.ignore();
-               std::cout << BIGREEN << "Conexión actualizada correctamente" << RESET <<std::endl;
-            }
-            else{
-               std::cin.ignore();
-               std::cout << BIRED << "Se ha introducido el mismo coste" << RESET <<std::endl;
-            }
-         }
-      }
-   }
-}
-void ed::agnadirVertice(ed::Graph & grafo, ed::Punto & a){
-   ed::Vertex a1;
-   a1.setData(a);
-   grafo.gotoVertex(a1);
-   if(grafo.getCurrentVertex()!=-1){
-      std::cin.ignore();
-      std::cout << BIRED << "Ese vértice ya se encuentra en el grafo. No se añade" << RESET <<std::endl;
-   }
-   else{
-      grafo.addVertex(a);
-      int i=grafo.getVertexVector().size()-1;
-      for(int j=0; j<grafo.getVertexVector().size()-1; j++){
-         grafo.addEdge(grafo.getVertexVector()[i], grafo.getVertexVector()[j], ed::distancia(grafo.getVertexVector()[i].getData(), grafo.getVertexVector()[j].getData()));
-         grafo.setMatrix(grafo.getVertexVector()[j].getLabel(), grafo.getVertexVector()[i].getLabel(), grafo.getMatrix()[grafo.getVertexVector()[i].getLabel()][grafo.getVertexVector()[j].getLabel()]);
-      }
-      std::cin.ignore();
-      std::cout << BIGREEN << "Vértice añadido correctamente" << RESET << std::endl;
-   }
-}
-ed::Graph ed::kruskal_algorithm(ed::Graph const & grafo, float & coste_total){
-   ed::Graph resultante;
+Graph kruskal_algorithm(Graph const & grafo, float & coste_total){
+   Graph resultante;
    // Vector ordenado que tiene las conexiones del grafo original
-   std::vector<ed::Edge> vector_ordenado=grafo.getEdgeVector();
+   std::vector<Edge> vector_ordenado=grafo.getEdgeVector();
    // Vector que contiene los nodos que estan en un mismo conjunto
    std::vector<int> nodos(grafo.getVertexVector().size(), 0);
    // El objetivo es que todos esten en el mismo conjunto, es decir, que todos los elementos sean = 1
@@ -212,12 +103,12 @@ ed::Graph ed::kruskal_algorithm(ed::Graph const & grafo, float & coste_total){
    // Ponemos el nodo 0 en el conjunto 1
    nodos[0]=1;
    // Añadimos el nodo 0 al grafo resultante
-   resultante.addVertex(grafo.getVertexVector()[0].getData());
+   resultante.addVertex(grafo.getVertexVector()[0].getNombre());
 
    int indice=0; //Indice del vertice deseado que se va a poner en el mismo conjunto
    int minimo=0; //Declaramos una variable para obtener el coste minimo
-   ed::Edge ladocandidato;
-   ed::Edge ladoDeseado;
+   Edge ladocandidato;
+   Edge ladoDeseado;
 
    while (nodos!=objetivo){
       ladocandidato.setData(-1);
@@ -253,8 +144,8 @@ ed::Graph ed::kruskal_algorithm(ed::Graph const & grafo, float & coste_total){
             indice=ladoDeseado.second().getLabel();
 
             //Preparamos la etiquetas para el grafo resultante
-            resultante.addVertex(ladoDeseado.second().getData());
-            ed::Vertex aux=ladoDeseado.second();
+            resultante.addVertex(ladoDeseado.second().getNombre());
+            Vertex aux=ladoDeseado.second();
             aux.setLabel(resultante.getCurrentVertex());
             ladoDeseado.setSecondVertex(aux);
 
@@ -268,8 +159,8 @@ ed::Graph ed::kruskal_algorithm(ed::Graph const & grafo, float & coste_total){
             if(nodos[ladoDeseado.second().getLabel()]==1){
                indice=ladoDeseado.first().getLabel();
 
-               resultante.addVertex(ladoDeseado.first().getData());
-               ed::Vertex aux=ladoDeseado.first();
+               resultante.addVertex(ladoDeseado.first().getNombre());
+               Vertex aux=ladoDeseado.first();
                aux.setLabel(resultante.getCurrentVertex());
                ladoDeseado.setFirstVertex(aux);
 
@@ -281,11 +172,8 @@ ed::Graph ed::kruskal_algorithm(ed::Graph const & grafo, float & coste_total){
          }
 
          //añadir el lado entre el vertice anterior y el vector conjunto visitados
-         // std::cout << "----> " << ladoDeseado.getData() <<'\n';
          // Vamos obteniendo la suma del arbol abarcador minimo
          coste_total+=ladoDeseado.getData();
-         // std::cout << "pipo -> " << resultante.getMatrix().size() << '\n';
-         // std::cout << ladoDeseado.first().getLabel() <<" " << ladoDeseado.second().getLabel() <<'\n';
          //Añadimos la conexion entre los dos vertices
          resultante.addEdge(ladoDeseado.first(), ladoDeseado.second(), ladoDeseado.getData());
          resultante.setMatrix(ladoDeseado.second().getLabel(), ladoDeseado.first().getLabel(), resultante.getMatrix()[ladoDeseado.first().getLabel()][ladoDeseado.second().getLabel()]);
