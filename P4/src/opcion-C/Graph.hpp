@@ -2,7 +2,6 @@
 #define GRAPH_HPP
 #include "Edge.hpp"
 #include <vector>
-#include <vector>
 class Graph{
    private:
       std::vector<Vertex> vertexes_;

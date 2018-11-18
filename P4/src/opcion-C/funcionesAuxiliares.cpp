@@ -2,8 +2,8 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <cfloat>
 #include <algorithm>
+#include <limits>
 #include "../macros.hpp"
 void cargarVertices(Graph & grafo, std::string fichero1, std::string fichero2){
    std::ifstream archivo1(fichero1.c_str());
@@ -56,12 +56,12 @@ void cargarVertices(Graph & grafo, std::string fichero1, std::string fichero2){
 void mostrarGrafo(Graph & grafo, int & coste_total){
    if(grafo.getVertexVector().size()>0){
       std::cout << BIBLUE << "Los vértices del grafo son:" << RESET <<'\n';
-      std::cout <<BIYELLOW<< "ETIQUETA" << RESET << BICYAN <<"\tPOSICION" << RESET <<std::endl;
+      std::cout <<BIYELLOW<< "ETIQUETA" << RESET << BICYAN <<"\tCIUDAD" << RESET <<std::endl;
       for(int i=0; i<grafo.getVertexVector().size(); i++){
          std::cout << BIYELLOW << grafo.getVertexVector()[i].getLabel() << RESET << BICYAN <<"\t\t"<<grafo.getVertexVector()[i].getNombre()<<std::endl;
       }
 
-      std::cout <<std::endl<<BIYELLOW<< "1º Vértice" << RESET << BICYAN <<"\t2º Vértice\t" << RESET << BIBLUE << "Coste" << RESET <<std::endl;
+      std::cout <<std::endl<<BIYELLOW<< "ORIGEN\t\t" << RESET << BICYAN <<"DESTINO\t\t" << RESET << BIBLUE << "DISTANCIA" << RESET <<std::endl;
       for(int j=0; j<grafo.getEdgeVector().size(); j++){
          std::cout << BIYELLOW << grafo.getEdgeVector()[j].first().getNombre() << RESET;
          std::cout << "\t\t";
@@ -98,13 +98,12 @@ Graph TSP(Graph & grafo, int & coste_total, int & nodo_inicio){
    int minimo=0; //Declaramos una variable para obtener el coste minimo
    Edge ladocandidato;
    Edge ladoDeseado;
-   bool nodo_inicio_despliegue;
 
    while (nodos!=objetivo){
       ladocandidato.setData(-1);
       ladoDeseado.setData(-1);
 
-      minimo=1000;
+      minimo=std::numeric_limits<int>::max();
       for(int i=0; i<nodos.size(); i++){
          if(nodos[i]==1){
             if(resultante.getConnectionsVertex(grafo.getVertexVector()[i]) < 2){//al nodo de inicio hay que ponerle < 1
@@ -167,8 +166,8 @@ Graph TSP(Graph & grafo, int & coste_total, int & nodo_inicio){
             }
          }
 
-         //añadir el lado entre el vertice anterior y el vector conjunto visitados
-         // Vamos obteniendo la suma del arbol abarcador minimo
+         //añadir el lado entre el vertice anterior y el vectice del conjunto visitados
+         //Vamos obteniendo la suma de la ruta del viajante
          coste_total+=ladoDeseado.getData();
          //Añadimos la conexion entre los dos vertices
          resultante.addEdge(ladoDeseado.first(), ladoDeseado.second(), ladoDeseado.getData());

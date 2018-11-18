@@ -1,7 +1,5 @@
 #ifndef VERTEX_HPP
 #define VERTEX_HPP
-#include <stdlib.h>
-#include <vector>
 #include <string>
 class Vertex{
    private:
