@@ -1,5 +1,4 @@
 #include "Graph.hpp"
-#include <iostream>
 bool Graph::isEmpty() const{
    return vertexes_.empty() && edges_.empty() && matrix_.empty();
 }

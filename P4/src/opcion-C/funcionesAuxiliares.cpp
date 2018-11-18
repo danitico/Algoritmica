@@ -53,7 +53,7 @@ void cargarVertices(Graph & grafo, std::string fichero1, std::string fichero2){
       }
    }
 }
-void mostrarGrafo(Graph & grafo, float & coste_total){
+void mostrarGrafo(Graph & grafo, int & coste_total){
    if(grafo.getVertexVector().size()>0){
       std::cout << BIBLUE << "Los vértices del grafo son:" << RESET <<'\n';
       std::cout <<BIYELLOW<< "ETIQUETA" << RESET << BICYAN <<"\tPOSICION" << RESET <<std::endl;
@@ -77,7 +77,7 @@ void mostrarGrafo(Graph & grafo, float & coste_total){
       std::cout << BIRED << "El grafo está vacio" << RESET <<std::endl;
    }
 }
-Graph kruskal_algorithm(Graph const & grafo, float & coste_total, int & nodo_inicio){
+Graph TSP(Graph & grafo, int & coste_total, int & nodo_inicio){
    Graph resultante;
    // Vector ordenado que tiene las conexiones del grafo original
    std::vector<Edge> vector_ordenado=grafo.getEdgeVector();
@@ -189,5 +189,15 @@ Graph kruskal_algorithm(Graph const & grafo, float & coste_total, int & nodo_ini
          std::sort(vector_ordenado.begin(), vector_ordenado.end());
       }
    }
+   //unimos el origen y el destino
+   grafo.gotoVertex(resultante.getVertexVector().front());
+   int origen=grafo.getCurrentVertex();
+   grafo.gotoVertex(resultante.getVertexVector().back());
+   int destino=grafo.getCurrentVertex();
+
+   resultante.addEdge(resultante.getVertexVector().front(), resultante.getVertexVector().back(), grafo.getMatrix1()[origen][destino]);
+   resultante.setMatrix(resultante.getVertexVector().back().getLabel(), resultante.getVertexVector().front().getLabel(), resultante.getMatrix()[resultante.getVertexVector().front().getLabel()][resultante.getVertexVector().back().getLabel()]);
+   coste_total+=grafo.getMatrix1()[origen][destino];
+
    return resultante;
 }

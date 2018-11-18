@@ -1,21 +1,22 @@
 #include "../funcionesAuxiliares.hpp"
 #include <gtest/gtest.h>
+#include <limits>
 TEST(Material, Constructor){
-   Graph a, b;
-   cargarVertices(a, "/home/daniel/Desktop/TERCERO_CARRERA/Algoritmica/P4/src/opcion-C/txt/nuevo1.txt", "/home/daniel/Desktop/TERCERO_CARRERA/Algoritmica/P4/src/opcion-C/txt/nuevo.txt");
+   Graph a, b, max;
+   cargarVertices(a, "/home/daniel/Desktop/TERCERO_CARRERA/Algoritmica/P4/src/opcion-C/txt/Andalucia.txt", "/home/daniel/Desktop/TERCERO_CARRERA/Algoritmica/P4/src/opcion-C/txt/matrizAndaluciaCompleta.txt");
 
-   // int tam=a.getMatrix1().size();
-   // for(int i=0; i<tam; i++){
-   //    for(int j=0; j<tam; j++){
-   //       std::cout << a.getMatrix1()[i][j] << " ";
-   //    }
-   //    std::cout << std::endl;
-   // }
+   int costeMin=std::numeric_limits<int>::max();
+   int coste=0;
+   for(int i=0; i < a.getVertexVector().size(); i++){
+      b = TSP(a, coste, i);
 
-   float coste=0.0;
-   int nodo_inicio=2;
-   b = kruskal_algorithm(a, coste, nodo_inicio);
-   mostrarGrafo(b, coste);
+      if(coste < costeMin){
+         costeMin = coste;
+         max = b;
+      }
+      coste=0;
+   }
+   mostrarGrafo(max, costeMin);
 }
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
