@@ -61,6 +61,7 @@ class Graph{
       void nextVertex();
       void goToFirstEdge();
       void nextEdge();
+      int getConnectionsVertex(Vertex const & u);
       Graph & operator=(Graph const &g);
 };
 #endif

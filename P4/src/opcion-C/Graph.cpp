@@ -1,4 +1,5 @@
 #include "Graph.hpp"
+#include <iostream>
 bool Graph::isEmpty() const{
    return vertexes_.empty() && edges_.empty() && matrix_.empty();
 }
@@ -142,6 +143,34 @@ void Graph::nextEdge(){
          break;
       }
    }
+}
+int Graph::getConnectionsVertex(Vertex const & u){
+   int oldEdge=getCurrentEdge();
+   int oldVertex=getCurrentVertex();
+   int contador=0;
+
+   gotoVertex(u);
+   if(getCurrentVertex()==-1){
+      return 0;
+   }
+   else{
+      goToFirstEdge();
+      if(getCurrentEdge()==oldEdge){
+         return 0;
+      }
+      else{
+         contador++;
+         nextEdge();
+         while(getCurrentEdge()!=-1){
+            contador++;
+            nextEdge();
+         }
+      }
+   }
+   currentVertex_=oldVertex;
+   currentEdge_=oldEdge;
+
+   return contador;
 }
 Graph & Graph::operator=(Graph const &g){
    this->vertexes_=g.vertexes_;

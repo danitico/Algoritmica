@@ -53,7 +53,7 @@ void cargarVertices(Graph & grafo, std::string fichero1, std::string fichero2){
       }
    }
 }
-void mostrarGrafo(Graph & grafo){
+void mostrarGrafo(Graph & grafo, float & coste_total){
    if(grafo.getVertexVector().size()>0){
       std::cout << BIBLUE << "Los vértices del grafo son:" << RESET <<'\n';
       std::cout <<BIYELLOW<< "ETIQUETA" << RESET << BICYAN <<"\tPOSICION" << RESET <<std::endl;
@@ -71,24 +71,13 @@ void mostrarGrafo(Graph & grafo){
          std::cout << std::endl;
       }
 
-      std::cout<<std::endl<<BIBLUE<<UNDERLINE<<"Matriz de adyacencias"<<RESET<<std::endl;
-      for(int k=0; k<grafo.getMatrix().size(); k++){
-         for(int k1=0; k1<grafo.getMatrix().size(); k1++){
-            if(grafo.getMatrix()[k][k1]==-1){
-               std::cout << "0 ";
-            }
-            else{
-               std::cout << grafo.getMatrix()[k][k1] + 1<<" ";
-            }
-         }
-         std::cout<<std::endl;
-      }
+      std::cout << std::endl << BIBLUE << "El coste total del grafo es: " << coste_total << RESET << std::endl;
    }
    else{
       std::cout << BIRED << "El grafo está vacio" << RESET <<std::endl;
    }
 }
-Graph kruskal_algorithm(Graph const & grafo, float & coste_total){
+Graph kruskal_algorithm(Graph const & grafo, float & coste_total, int & nodo_inicio){
    Graph resultante;
    // Vector ordenado que tiene las conexiones del grafo original
    std::vector<Edge> vector_ordenado=grafo.getEdgeVector();
@@ -101,14 +90,15 @@ Graph kruskal_algorithm(Graph const & grafo, float & coste_total){
    std::sort(vector_ordenado.begin(), vector_ordenado.end());
 
    // Ponemos el nodo 0 en el conjunto 1
-   nodos[0]=1;
+   nodos[nodo_inicio]=1;
    // Añadimos el nodo 0 al grafo resultante
-   resultante.addVertex(grafo.getVertexVector()[0].getNombre());
+   resultante.addVertex(grafo.getVertexVector()[nodo_inicio].getNombre());
 
    int indice=0; //Indice del vertice deseado que se va a poner en el mismo conjunto
    int minimo=0; //Declaramos una variable para obtener el coste minimo
    Edge ladocandidato;
    Edge ladoDeseado;
+   bool nodo_inicio_despliegue;
 
    while (nodos!=objetivo){
       ladocandidato.setData(-1);
@@ -117,19 +107,25 @@ Graph kruskal_algorithm(Graph const & grafo, float & coste_total){
       minimo=1000;
       for(int i=0; i<nodos.size(); i++){
          if(nodos[i]==1){
-            for(int j=0; j<nodos.size(); j++){
-               if(nodos[j]==0){
-                  for(int k=0; k<vector_ordenado.size(); k++){
-                     if(vector_ordenado[k].has(grafo.getVertexVector()[i]) && vector_ordenado[k].has(grafo.getVertexVector()[j])){
-                        ladocandidato.setFirstVertex(vector_ordenado[k].first());
-                        ladocandidato.setSecondVertex(vector_ordenado[k].second());
-                        ladocandidato.setData(vector_ordenado[k].getData());
-                        break;
-                     }
+            if(resultante.getConnectionsVertex(grafo.getVertexVector()[i]) < 2){//al nodo de inicio hay que ponerle < 1
+               for(int j=0; j<nodos.size(); j++){
+                  if(i==nodo_inicio && resultante.getConnectionsVertex(grafo.getVertexVector()[nodo_inicio]) >=1){
+                     break;
                   }
-                  if(ladocandidato.getData() < minimo){
-                     minimo=ladocandidato.getData();
-                     ladoDeseado=ladocandidato;
+                  if(nodos[j]==0){
+                     for(int k=0; k<vector_ordenado.size(); k++){
+                        if(vector_ordenado[k].has(grafo.getVertexVector()[i]) &&
+                           vector_ordenado[k].has(grafo.getVertexVector()[j])){
+                           ladocandidato.setFirstVertex(vector_ordenado[k].first());
+                           ladocandidato.setSecondVertex(vector_ordenado[k].second());
+                           ladocandidato.setData(vector_ordenado[k].getData());
+                           break;
+                        }
+                     }
+                     if(ladocandidato.getData() < minimo){
+                        ladoDeseado=ladocandidato;
+                        minimo=ladocandidato.getData();
+                     }
                   }
                }
             }
