@@ -7,16 +7,8 @@ TEST(Material, Constructor){
 
    int costeMin=std::numeric_limits<int>::max();
    int coste=0;
-   for(int i=0; i < a.getVertexVector().size(); i++){
-      b = TSP(a, coste, i);
-
-      if(coste < costeMin){
-         costeMin = coste;
-         max = b;
-      }
-      coste=0;
-   }
-   mostrarGrafo(max, costeMin);
+   b = TSP(a, coste);
+   mostrarGrafo(b, coste);
 }
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
