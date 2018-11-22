@@ -219,6 +219,7 @@ void problemaTSP(){
 
    std::cout << BIPURPLE << "Introduzca el fichero con la matriz de conexión: " << RESET;
    std::cin >> fichero2;
+   std::cin.ignore();
 
    Graph grafo, optimo;
    int coste_total;
@@ -226,5 +227,4 @@ void problemaTSP(){
    cargarVertices(grafo, fichero1, fichero2);
    optimo = TSP(grafo, coste_total);
    mostrarGrafo(optimo, coste_total);
-   std::cin.ignore();
 }
