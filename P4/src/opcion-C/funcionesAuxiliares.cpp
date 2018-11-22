@@ -225,5 +225,6 @@ void problemaTSP(){
 
    cargarVertices(grafo, fichero1, fichero2);
    optimo = TSP(grafo, coste_total);
-   mostrarGrafo(grafo, coste_total);
+   mostrarGrafo(optimo, coste_total);
+   std::cin.ignore();
 }
