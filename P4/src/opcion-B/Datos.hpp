@@ -12,7 +12,7 @@ class Datos{
       static inline bool ordenacionAscendente(Material i, Material j){return i.getPrecio() >= j.getPrecio();}
       inline void setMateriales(std::vector<Material> materiales){materiales_=materiales;}
    public:
-      Datos(int volumenMochila=0, std::string fichero_datos=""){
+      Datos(int volumenMochila=0, std::string fichero_datos="../src/opcion-B/txt/materiales.txt"){
          this->setVolumenMochila(volumenMochila);
          this->setMateriales(fichero_datos);
       }

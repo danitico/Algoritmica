@@ -44,12 +44,6 @@ bool Datos::operator==(const Datos & b) const{
    }
 }
 std::istream & operator>>(std::istream & stream, Datos & a){
-   std::string fichero;
-
-   std::cout << BIPURPLE << "Introduzca el fichero con los datos de los materiales: " << RESET;
-   stream >> fichero;
-   a.setMateriales(fichero);
-
    std::cout << BIPURPLE << "Introduzca el tamaño de la mochila: " << RESET;
    stream >> a.volumenMochila_;
 

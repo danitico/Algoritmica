@@ -213,18 +213,10 @@ Graph TSP(Graph & grafo, int & coste_total){
    return optimo;
 }
 void problemaTSP(){
-   std::string fichero1, fichero2;
-   std::cout << BIPURPLE << "Introduzca el fichero con los nombres de las ciudades: " << RESET;
-   std::cin >> fichero1;
-
-   std::cout << BIPURPLE << "Introduzca el fichero con la matriz de conexión: " << RESET;
-   std::cin >> fichero2;
-   std::cin.ignore();
-
    Graph grafo, optimo;
    int coste_total;
 
-   cargarVertices(grafo, fichero1, fichero2);
+   cargarVertices(grafo, "../src/opcion-C/txt/Andalucia.txt", "../src/opcion-C/txt/matrizAndaluciaCompleta.txt");
    optimo = TSP(grafo, coste_total);
    mostrarGrafo(optimo, coste_total);
 }
