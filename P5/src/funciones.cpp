@@ -12,7 +12,7 @@ void problemaMochila(){
    }
    else{
       solucion.setDatos(datos);
-      std::vector<std::vector<int> > tabla(datos.getVolumenMochila(), std::vector<int>(datos.getMateriales().size(), 0));
+      std::vector<std::vector<float> > tabla(datos.getMateriales().size() + 1, std::vector<float>(datos.getVolumenMochila() + 1, 0.0));
       solucion.Mochila(tabla);
 
 

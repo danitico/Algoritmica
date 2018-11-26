@@ -1,6 +1,6 @@
 #include "Material.hpp"
 #include "macros.hpp"
-int Material::getTotal() const{
+float Material::getTotal() const{
    return this->getVolumen() * this->getPrecio();
 }
 std::ostream & operator<<(std::ostream & stream, const Material & a){

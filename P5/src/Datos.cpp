@@ -15,7 +15,7 @@ void Datos::setMateriales(std::string fichero_datos){
          volumen=stoi(stream);
 
          getline(f, stream, '\n');
-         precio=stoi(stream);
+         precio=stof(stream);
 
          materiales_.push_back(Material(etiqueta, volumen, precio, true));
       }

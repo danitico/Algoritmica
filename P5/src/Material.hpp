@@ -3,10 +3,12 @@
 #include <iostream>
 class Material{
    private:
-      int etiqueta_, volumen_, precio_;
+      int etiqueta_, volumen_;
+      // int precio_;
+      float precio_;
       bool disponible_;
    public:
-      inline Material(int etiqueta=0, int volumen=0, int precio=0, bool disponible=false){
+      inline Material(int etiqueta=0, int volumen=0, float precio=0.0, bool disponible=false){
          this->setEtiqueta(etiqueta);
          this->setVolumen(volumen);
          this->setPrecio(precio);
@@ -24,10 +26,10 @@ class Material{
       inline void setVolumen(int volumen){
          volumen_=volumen;
       }
-      inline int getPrecio() const{
+      inline float getPrecio() const{
          return precio_;
       }
-      inline void setPrecio(int precio){
+      inline void setPrecio(float precio){
          precio_=precio;
       }
       inline bool getDisponible() const{
@@ -36,7 +38,7 @@ class Material{
       inline void setDisponible(bool disponible){
          disponible_=disponible;
       }
-      int getTotal() const;
+      float getTotal() const;
       friend std::ostream & operator<<(std::ostream & stream, const Material & a);
       void operator=(const Material & a);
       bool operator==(const Material & b) const;

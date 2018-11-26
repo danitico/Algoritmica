@@ -18,7 +18,7 @@ class Solucion{
       inline void setDatos(Datos datos){
          datos_=datos;
       }
-      void Mochila(std::vector<std::vector<int> > & tabla);
+      void Mochila(std::vector<std::vector<float> > & tabla);
       friend std::ostream & operator<<(std::ostream & stream, const Solucion & a);
 };
 #endif
