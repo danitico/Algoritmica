@@ -1,17 +1,9 @@
 #include "Solucion.hpp"
 #include "macros.hpp"
 #include <algorithm>
-void Solucion::Mochila(std::vector<std::vector<float> > & tabla){
+void Solucion::tablaMochila(std::vector<std::vector<float> > & tabla){
    std::vector<Material> materiales = this->getDatos().getMateriales();
    int volumenMochila=this->getDatos().getVolumenMochila();
-
-   // for(int i=1; i<volumenMochila + 1; i++){
-   //    tabla[0][i]=0;
-   // }
-   //
-   // for(int i=0; i<materiales.size() + 1; i++){
-   //    tabla[i][0]=0;
-   // }
 
    for(int i=1; i<=materiales.size(); i++){
       for(int j=0; j<=volumenMochila; j++){
@@ -26,6 +18,22 @@ void Solucion::Mochila(std::vector<std::vector<float> > & tabla){
                tabla[i][j]=std::max(tabla[i-1][j], materiales[i-1].getTotal() + tabla[i-1][j-materiales[i-1].getVolumen()]);
             }
          }
+      }
+   }
+}
+void Solucion::solucionMochila(std::vector<std::vector<float> > & tabla){
+   std::vector<Material> materiales = this->getDatos().getMateriales();
+   int volumenMochila=this->getDatos().getVolumenMochila();
+   int x=0;
+
+   while(volumenMochila!=0){
+      if(materiales[x].getVolumen() > volumenMochila){
+         x--;
+      }
+      else{
+         utilizados_.push_back(materiales[x]);
+         x--;
+         volumenMochila -= materiales[x].getVolumen();
       }
    }
 }
