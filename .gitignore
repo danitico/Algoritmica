@@ -1,8 +1,5 @@
 *.out
-P1/build/
-P2/build/
-P3/build/
-P4/build/
+P*/build/
 *.exe
 *.tar.xz
 *.zip
