@@ -15,6 +15,7 @@ void problemaMochila(){
       std::vector<std::vector<float> > tabla(datos.getMateriales().size() + 1, std::vector<float>(datos.getVolumenMochila() + 1, 0.0));
       solucion.Mochila(tabla);
 
+      tabla.erase(tabla.begin());
 
       for(int i=0; i<tabla.size(); i++){
          for(int j=0; j<tabla[0].size(); j++){
