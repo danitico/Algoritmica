@@ -8,3 +8,6 @@ add_executable(mochila ${PROJECT_SOURCE_DIR}main.cpp
                        ${PROJECT_SOURCE_DIR}Datos.cpp
                        ${PROJECT_SOURCE_DIR}Solucion.cpp
                        ${PROJECT_SOURCE_DIR}funciones.cpp)
+# add_executable(cambio ${PROJECT_SOURCE_DIR}Cambio/SistemaMonetario.cpp
+#                       ${PROJECT_SOURCE_DIR}Cambio/Moneda.cpp
+#                       ${PROJECT_SOURCE_DIR}Cambio/funciones.cpp)

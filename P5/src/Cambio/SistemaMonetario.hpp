@@ -9,23 +9,23 @@ class SistemaMonetario{
       std::vector<Moneda> monedas_;
       int cursor_max_;
       static bool sortFunct(Moneda i,Moneda j){return i.getValor()<j.getValor();}
+      void sortMonedas();
    public:
       SistemaMonetario(){
          cursor_max_=-1;
       }
-      void insertMoneda(const Moneda moneda);
-      bool borrarMoneda(const Moneda moneda);
-      int size() const{
-         return monedas_.size();
-      }
       std::vector<Moneda> getSistemaMonetario()const{
          return monedas_;
       }
-      void sortMonedas();
+      int size() const{
+         return monedas_.size();
+      }
       bool setMaximo(int k);
       Moneda getMaximo(){
          return monedas_[cursor_max_];
       }
+      void insertMoneda(const Moneda moneda);
+      bool borrarMoneda(const Moneda moneda);
       friend std::istream & operator>>(std::istream & stream, SistemaMonetario & sistema);
       friend std::ostream & operator<<(std::ostream & stream, const SistemaMonetario & sistema);
 };
