@@ -23,17 +23,17 @@ void Solucion::tablaMochila(std::vector<std::vector<float> > & tabla){
 }
 void Solucion::solucionMochila(std::vector<std::vector<float> > & tabla){
    std::vector<Material> materiales = this->getDatos().getMateriales();
-   int volumenMochila=this->getDatos().getVolumenMochila();
-   int x=0;
+   int i = materiales.size();
+   int j=this->getDatos().getVolumenMochila();
 
-   while(volumenMochila!=0){
-      if(materiales[x].getVolumen() > volumenMochila){
-         x--;
+   while(tabla[i][j]!=0){
+      if(tabla[i][j]==tabla[i-1][j]){
+         i--;
       }
       else{
-         utilizados_.push_back(materiales[x]);
-         x--;
-         volumenMochila -= materiales[x].getVolumen();
+         utilizados_.push_back(materiales[i-1]);
+         i--;
+         j -= materiales[i].getVolumen();
       }
    }
 }
