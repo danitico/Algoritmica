@@ -8,7 +8,9 @@ class SistemaMonetario{
    private:
       std::vector<Moneda> monedas_;
       int cursor_max_;
-      static bool sortFunct(Moneda i,Moneda j){return i.getValor()<j.getValor();}
+      static bool sortFunct(Moneda i, Moneda j){
+         return i.getValor() < j.getValor();
+      }
       void sortMonedas();
    public:
       SistemaMonetario(){
@@ -26,6 +28,7 @@ class SistemaMonetario{
       }
       void insertMoneda(const Moneda moneda);
       bool borrarMoneda(const Moneda moneda);
+      void cambio(std::vector<std::vector<int> > & tabla, int N);
       friend std::istream & operator>>(std::istream & stream, SistemaMonetario & sistema);
       friend std::ostream & operator<<(std::ostream & stream, const SistemaMonetario & sistema);
 };
