@@ -1,4 +1,4 @@
-#ifndef FUNCIONES_AUXILIARES_HPP
-#define FUNCIONES_AUXILIARES_HPP
+#ifndef FUNCIONES_HPP
+#define FUNCIONES_HPP
 void problemaCambio();
 #endif

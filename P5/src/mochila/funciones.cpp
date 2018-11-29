@@ -1,6 +1,6 @@
 #include "funciones.hpp"
 #include "Solucion.hpp"
-#include "macros.hpp"
+#include "../macros.hpp"
 void problemaMochila(){
    Solucion solucion;
    Datos datos;

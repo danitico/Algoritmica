@@ -1,7 +1,7 @@
 #include "Datos.hpp"
 #include <fstream>
 #include <algorithm>
-#include "macros.hpp"
+#include "../macros.hpp"
 void Datos::setMateriales(std::string fichero_datos){
    std::ifstream f(fichero_datos.c_str());
    if(f.is_open()){

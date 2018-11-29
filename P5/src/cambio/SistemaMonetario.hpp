@@ -2,19 +2,23 @@
 #define SISTEMA_MONETARIO_HPP
 #include <vector>
 #include <iostream>
+#include <string>
 #include <algorithm>
 #include "Moneda.hpp"
 class SistemaMonetario{
    private:
       std::vector<Moneda> monedas_;
       int cursor_max_;
+
       static bool sortFunct(Moneda i, Moneda j){
          return i.getValor() < j.getValor();
       }
       void sortMonedas();
+      void cargarArchivo(std::string archivo);
    public:
-      SistemaMonetario(){
+      SistemaMonetario(std::string archivo="../src/cambio/txt/Euros.txt"){
          cursor_max_=-1;
+         cargarArchivo(archivo);
       }
       std::vector<Moneda> getSistemaMonetario()const{
          return monedas_;
@@ -26,10 +30,8 @@ class SistemaMonetario{
       Moneda getMaximo(){
          return monedas_[cursor_max_];
       }
-      void insertMoneda(const Moneda moneda);
       bool borrarMoneda(const Moneda moneda);
       void cambio(std::vector<std::vector<int> > & tabla, int N);
-      friend std::istream & operator>>(std::istream & stream, SistemaMonetario & sistema);
       friend std::ostream & operator<<(std::ostream & stream, const SistemaMonetario & sistema);
 };
 #endif

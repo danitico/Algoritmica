@@ -1,5 +1,5 @@
 #include "Solucion.hpp"
-#include "macros.hpp"
+#include "../macros.hpp"
 #include <algorithm>
 void Solucion::tablaMochila(std::vector<std::vector<float> > & tabla){
    std::vector<Material> materiales = this->getDatos().getMateriales();

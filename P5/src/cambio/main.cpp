@@ -11,7 +11,7 @@ int main(){
 
       posicion++;
       PLACE(posicion++, 10);
-      std::cout << "1. Problema de la Mochila";
+      std::cout << "1. Problema del cambio";
 
       PLACE(posicion++, 10);
       std::cout << "2. Salir del programa";
@@ -27,7 +27,7 @@ int main(){
       PLACE(3, 1);
       switch(opcion){
          case 1:
-            problemaMochila();
+            problemaCambio();
             break;
          case 2:
             std::cout << INVERSE;
