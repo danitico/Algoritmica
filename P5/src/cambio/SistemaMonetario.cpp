@@ -18,30 +18,11 @@ void SistemaMonetario::cargarArchivo(std::string archivo){
          monedas_.push_back(Moneda(valor, tipo));
       }
       f.close();
+      sortMonedas();
    }
    else{
       monedas_.resize(0);
    }
-}
-bool SistemaMonetario::setMaximo(int k){
-   cursor_max_=-1;
-   int i=monedas_.size()-1;
-   for( ; i>=0; i--){
-      if(monedas_[i].getValor()<=k){
-         cursor_max_=i;
-         return true;
-      }
-   }
-   return false;
-}
-bool SistemaMonetario::borrarMoneda(const Moneda moneda){
-   for(int i=0; i<monedas_.size(); i++){
-      if(moneda==monedas_[i]){
-         monedas_.erase(monedas_.begin()+i);
-         return true;
-      }
-   }
-   return false;
 }
 void SistemaMonetario::cambio(std::vector<std::vector<int> > & tabla, int N){
 	for(int i=1; i<=getSistemaMonetario().size(); i++){
@@ -62,6 +43,22 @@ void SistemaMonetario::cambio(std::vector<std::vector<int> > & tabla, int N){
                }
             }
          }
+      }
+   }
+}
+void SistemaMonetario::solucion(std::vector<std::vector<int> > & tabla, int N){
+   std::vector<Moneda> monedas= this->getSistemaMonetario();
+   int i = monedas.size();
+   int j = N;
+
+   while(j!=0){
+      if(tabla[i][j]==tabla[i-1][j]){
+         i--;
+      }
+      else{
+         // utilizados_.push_back(materiales[i-1]);
+         std::cout << "Moneda de valor " << monedas[i-1].getValor() << std::endl;
+         j -= monedas[i-1].getValor();
       }
    }
 }

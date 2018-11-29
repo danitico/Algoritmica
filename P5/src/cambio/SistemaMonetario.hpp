@@ -26,12 +26,8 @@ class SistemaMonetario{
       int size() const{
          return monedas_.size();
       }
-      bool setMaximo(int k);
-      Moneda getMaximo(){
-         return monedas_[cursor_max_];
-      }
-      bool borrarMoneda(const Moneda moneda);
       void cambio(std::vector<std::vector<int> > & tabla, int N);
+      void solucion(std::vector<std::vector<int> > & tabla, int N);
       friend std::ostream & operator<<(std::ostream & stream, const SistemaMonetario & sistema);
 };
 #endif
