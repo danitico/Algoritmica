@@ -3,15 +3,14 @@
 #include <vector>
 #include <iostream>
 #include <string>
-#include <algorithm>
 #include "Moneda.hpp"
 class SistemaMonetario{
    private:
       std::vector<Moneda> monedas_;
       int cursor_max_;
 
-      static bool sortFunct(Moneda i, Moneda j){
-         return i.getValor() < j.getValor();
+      static inline bool sortFunct(Moneda i, Moneda j){
+         return (i.getValor() <= j.getValor());
       }
       void sortMonedas();
       void cargarArchivo(std::string archivo);

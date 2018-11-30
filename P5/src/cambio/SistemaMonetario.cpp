@@ -26,7 +26,7 @@ void SistemaMonetario::cargarArchivo(std::string archivo){
 }
 void SistemaMonetario::cambio(std::vector<std::vector<int> > & tabla, int N){
 	for(int i=1; i<=getSistemaMonetario().size(); i++){
-      for(int j=1; j<=N+1; j++){
+      for(int j=1; j<N+1; j++){
          if(i==1 && j < getSistemaMonetario()[i-1].getValor()){
             tabla[i][j]=-1;
          }
@@ -35,7 +35,7 @@ void SistemaMonetario::cambio(std::vector<std::vector<int> > & tabla, int N){
                tabla[i][j]= 1 + tabla[i][j - getSistemaMonetario()[0].getValor()];
             }
             else{
-               if(j < getSistemaMonetario()[i-1].getValor()){
+               if(j - getSistemaMonetario()[i-1].getValor() < 0){
                   tabla[i][j]=tabla[i-1][j];
                }
                else{
