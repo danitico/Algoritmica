@@ -2,7 +2,6 @@
 #define MONEDA_HPP
 #include <iostream>
 #include <string>
-#include <fstream>
 class Moneda{
    private:
       int valor_;
@@ -25,6 +24,5 @@ class Moneda{
          return tipo_;
       }
       friend std::ostream & operator<<(std::ostream & stream, const Moneda & moneda);
-      bool operator==(const Moneda & m) const;
 };
 #endif
