@@ -2,6 +2,7 @@
 #include "funciones.hpp"
 #include "../macros.hpp"
 int main(){
+   srand(time(NULL));
    int opcion=0;
    do{
       int posicion=2;
@@ -14,7 +15,10 @@ int main(){
       std::cout << "1. Problema de la Mochila";
 
       PLACE(posicion++, 10);
-      std::cout << "2. Salir del programa";
+      std::cout << "2. Rendimiento del problema de la Mochila";
+
+      PLACE(posicion++, 10);
+      std::cout << "3. Salir del programa";
 
       posicion++;
 
@@ -29,7 +33,11 @@ int main(){
          case 1:
             problemaMochila();
             break;
+
          case 2:
+            rendimientoMochila();
+            break;
+         case 3:
             std::cout << INVERSE;
             std::cout << "Fin del programa" << std::endl;
             std::cout << RESET;
@@ -58,5 +66,5 @@ int main(){
          std::cin.ignore();
          std::cout << CLEAR_SCREEN;
       }
-   }while(opcion!=2);
+   }while(opcion!=3);
 }

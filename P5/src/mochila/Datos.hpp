@@ -10,7 +10,6 @@ class Datos{
 
       void ordenarMateriales();
       static inline bool ordenacionAscendente(Material i, Material j){return i.getPrecio() >= j.getPrecio();}
-      inline void setMateriales(std::vector<Material> materiales){materiales_=materiales;}
    public:
       Datos(int volumenMochila=0, std::string fichero_datos="../src/mochila/txt/materiales.txt"){
          this->setVolumenMochila(volumenMochila);
@@ -20,6 +19,7 @@ class Datos{
          return materiales_;
       }
       void setMateriales(std::string fichero_datos);
+      inline void setMateriales(std::vector<Material> materiales){materiales_=materiales;}
       inline int getVolumenMochila() const{
          return volumenMochila_;
       }
