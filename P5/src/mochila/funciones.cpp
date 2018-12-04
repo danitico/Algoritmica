@@ -75,11 +75,11 @@ void rendimientoMochila(){
 
    estadistica.setEstimado(estimado);
    estadistica.guardarDatos("mochila.txt");
-   system("../src/mochila/grafico.sh mochila");
+   int retCode=system("../src/mochila/grafico.sh mochila");
 
    std::cout << BIBLUE << "Coeficiente de Determinación: " << RESET << IRED << ITALIC << UNDERLINE <<estadistica.coeficienteDeterminacion()<<RESET<<std::endl;
    std::cout << BIBLUE << "La función es: " << RESET;
-   std::cout << IRED << ITALIC << UNDERLINE << std::showpos << X[2][0] << "x²" << X[1][0] << "x" << X[0][0] << std::noshowpos << RESET << std::endl;
+   std::cout << IRED << ITALIC << UNDERLINE << X[2][0] << "x²" << std::showpos << X[1][0] << "x" << X[0][0] << std::noshowpos << RESET << std::endl;
 
    int x=-1;
    while(x!=0){
