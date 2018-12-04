@@ -53,7 +53,7 @@ int main(){
             break;
       }
 
-      if(opcion!=2){
+      if(opcion!=3){
          std::cout << std::endl << std::endl;
          std::cout << "Pulse ";
          std::cout << BIGREEN;

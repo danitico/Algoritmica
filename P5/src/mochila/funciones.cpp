@@ -29,30 +29,37 @@ void rendimientoMochila(){
    std::vector<double> n;
    std::vector<double> tiempo;
    std::vector<std::vector<float> > tabla;
-   int volumenMochila, volumen, precio;
+   int volumenMochila, volumen, precio, repeticiones;
+   double tiempoElapsed=0.0;
+
+   std::cout << BIPURPLE << "Introduzca el número de repeticiones: " << RESET;
+   std::cin >> repeticiones;
 
    for(int i=100; i<=200; i++){
-      tabla.resize(0);
-      materiales.resize(0);
-      for(int j=0; j<i; j++){
-         volumen=rand()%101;
-         precio=rand()%101;
-         volumenMochila+=volumen;
+      for(int k=0; k<repeticiones; k++){
+         tabla.resize(0);
+         materiales.resize(0);
+         for(int j=0; j<i; j++){
+            volumen=rand()%101;
+            precio=rand()%101;
+            volumenMochila+=volumen;
 
-         materiales.push_back(Material(j, volumen, precio));
+            materiales.push_back(Material(j, volumen, precio));
+         }
+
+         datos.setMateriales(materiales);
+         datos.setVolumenMochila(volumenMochila/2);
+         solucion.setDatos(datos);
+         tabla.resize(datos.getMateriales().size() + 1, std::vector<float>(datos.getVolumenMochila() + 1, 0.0));
+
+         reloj.start();
+         solucion.tablaMochila(tabla);
+         reloj.stop();
+
+         tiempoElapsed+=reloj.elapsed();
       }
-
-      datos.setMateriales(materiales);
-      datos.setVolumenMochila(volumenMochila/2);
-      solucion.setDatos(datos);
-      tabla.resize(datos.getMateriales().size() + 1, std::vector<float>(datos.getVolumenMochila() + 1, 0.0));
-
-      reloj.start();
-      solucion.tablaMochila(tabla);
-      reloj.stop();
-
       n.push_back(i);
-      tiempo.push_back(reloj.elapsed());
+      tiempo.push_back(tiempoElapsed/repeticiones);
    }
 
    Estadistica estadistica(n, tiempo);
