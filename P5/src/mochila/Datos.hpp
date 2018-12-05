@@ -15,8 +15,8 @@ class Datos{
          this->setVolumenMochila(volumenMochila);
          this->setMateriales(fichero_datos);
       }
-      inline Material getMateriales(int indice) const{
-         return materiales_[indice];
+      inline std::vector<Material> getMateriales() const{
+         return materiales_;
       }
       void setMateriales(std::string fichero_datos);
       inline void setMateriales(std::vector<Material> materiales){materiales_=materiales;}

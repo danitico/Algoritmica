@@ -9,8 +9,8 @@ class Solucion{
       Solucion(){
          utilizados_.resize(0);
       }
-      inline Material getUtilizados(int indice) const{
-         return utilizados_[indice];
+      inline std::vector<Material> getUtilizados() const{
+         return utilizados_;
       }
       inline Datos getDatos(){
          return datos_;
