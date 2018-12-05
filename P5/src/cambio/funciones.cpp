@@ -9,7 +9,7 @@ void problemaCambio(){
 	std::cin >> cantidadFlotante;
 
 	int cantidadEntero = cantidadFlotante * 100;
-	std::vector<std::vector<int> > tabla(sistema.getSistemaMonetario().size()+1, std::vector<int>(cantidadEntero+1, 0));
+	std::vector<std::vector<int> > tabla(sistema.getTamagno()+1, std::vector<int>(cantidadEntero+1, 0));
 
 	sistema.cambio(tabla, cantidadEntero);
 	sistema.solucion(tabla, cantidadEntero);
