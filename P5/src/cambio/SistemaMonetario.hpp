@@ -21,14 +21,11 @@ class SistemaMonetario{
          cargarArchivo(archivo);
          normalizarMonedas();
       }
-      Moneda getSistemaMonetario(int indice) const{
-         return monedas_[indice];
+      std::vector<Moneda> getSistemaMonetario()const{
+         return monedas_;
       }
-      Moneda getSistemaMonetarioNormalizado(int indice) const{
-         return monedasNormalizado_[indice];
-      }
-      int getTamagno() const{
-         return monedas_.size();
+      std::vector<Moneda> getSistemaMonetarioNormalizado() const{
+         return monedasNormalizado_;
       }
       void cambio(std::vector<std::vector<int> > & tabla, int N);
       void solucion(std::vector<std::vector<int> > & tabla, int N);
