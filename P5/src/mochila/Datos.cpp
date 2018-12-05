@@ -31,7 +31,7 @@ void Datos::operator=(const Datos & a){
    this->setVolumenMochila(a.getVolumenMochila());
 }
 bool Datos::operator==(const Datos & b) const{
-   if(getMateriales() == b.getMateriales() && getVolumenMochila() == b.getVolumenMochila()){
+   if(materiales_ == b.materiales_ && getVolumenMochila() == b.getVolumenMochila()){
       return true;
    }
    else{

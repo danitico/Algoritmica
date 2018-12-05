@@ -2,10 +2,10 @@
 #include "../macros.hpp"
 #include <algorithm>
 void Solucion::tablaMochila(std::vector<std::vector<float> > & tabla){
-   std::vector<Material> materiales = this->getDatos().getMateriales();
+   // std::vector<Material> materiales = this->getDatos().getMateriales();
    int volumenMochila=this->getDatos().getVolumenMochila();
 
-   for(int i=1; i<=materiales.size(); i++){
+   for(int i=1; i<=getDatos().materiales_.size(); i++){
       for(int j=0; j<=volumenMochila; j++){
          if(materiales[i-1].getVolumen() > j){
             tabla[i][j]=tabla[i-1][j];
