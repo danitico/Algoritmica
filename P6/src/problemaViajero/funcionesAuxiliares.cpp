@@ -179,12 +179,12 @@ Graph TSP(Graph & grafo, int & coste_total){
             //añadir el lado entre el vertice anterior y el vectice del conjunto visitados
             //Vamos obteniendo la suma de la ruta del viajante
             coste+=ladoDeseado.getData();
-            if(coste > coste_total){
-               camino_optimo=false;
-               break;
+            if(coste < coste_total){
+               camino_optimo=true;
             }
             else{
-               camino_optimo=true;
+               camino_optimo=false;
+               break;
             }
 
             //Añadimos la conexion entre los dos vertices
@@ -207,7 +207,6 @@ Graph TSP(Graph & grafo, int & coste_total){
          }
       }
       if(camino_optimo){
-         std::cout << "hola" << '\n';
          // unimos el origen y el destino
          grafo.gotoVertex(resultante.getVertexVector().front());
          int origen=grafo.getCurrentVertex();
@@ -217,15 +216,14 @@ Graph TSP(Graph & grafo, int & coste_total){
          resultante.addEdge(resultante.getVertexVector().front(), resultante.getVertexVector().back(), grafo.getMatrix1()[origen][destino]);
          resultante.setMatrix(resultante.getVertexVector().back().getLabel(), resultante.getVertexVector().front().getLabel(), resultante.getMatrix()[resultante.getVertexVector().front().getLabel()][resultante.getVertexVector().back().getLabel()]);
          candidato_mejor_coste_ultima_conexion=grafo.getMatrix1()[origen][destino];
-      }
 
-      if(candidato_mejor_coste_ultima_conexion < mejor_coste_ultima_conexion){
-         mejor_coste_ultima_conexion=candidato_mejor_coste_ultima_conexion;
-      }
-
-      if(coste + candidato_mejor_coste_ultima_conexion < coste_total + mejor_coste_ultima_conexion){
-         optimo=resultante;
-         coste_total=coste;
+         if(coste < coste_total){
+            if(candidato_mejor_coste_ultima_conexion < mejor_coste_ultima_conexion ){
+               mejor_coste_ultima_conexion=candidato_mejor_coste_ultima_conexion;
+               optimo=resultante;
+               coste_total=coste;
+            }
+         }
       }
    }
    coste_total+=mejor_coste_ultima_conexion;
