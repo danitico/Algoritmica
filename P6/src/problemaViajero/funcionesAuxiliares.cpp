@@ -80,10 +80,14 @@ void mostrarGrafo(Graph & grafo, int & coste_total){
 Graph TSP(Graph & grafo, int & coste_total){
    Graph optimo;
    int coste;
+   int mejor_coste_ultima_conexion=std::numeric_limits<int>::max(), candidato_mejor_coste_ultima_conexion;
+   bool camino_optimo;
    coste_total=std::numeric_limits<int>::max();
 
    for(int nodo_inicio=0; nodo_inicio < grafo.getVertexVector().size(); nodo_inicio++){
+      camino_optimo=false;
       coste = 0;
+      candidato_mejor_coste_ultima_conexion=0;
       Graph resultante;
       // Vector ordenado que tiene las conexiones del grafo original
       std::vector<Edge> vector_ordenado=grafo.getEdgeVector();
@@ -175,6 +179,14 @@ Graph TSP(Graph & grafo, int & coste_total){
             //añadir el lado entre el vertice anterior y el vectice del conjunto visitados
             //Vamos obteniendo la suma de la ruta del viajante
             coste+=ladoDeseado.getData();
+            if(coste > coste_total){
+               camino_optimo=false;
+               break;
+            }
+            else{
+               camino_optimo=true;
+            }
+
             //Añadimos la conexion entre los dos vertices
             resultante.addEdge(ladoDeseado.first(), ladoDeseado.second(), ladoDeseado.getData());
             resultante.setMatrix(ladoDeseado.second().getLabel(), ladoDeseado.first().getLabel(), resultante.getMatrix()[ladoDeseado.first().getLabel()][ladoDeseado.second().getLabel()]);
@@ -194,21 +206,29 @@ Graph TSP(Graph & grafo, int & coste_total){
             std::sort(vector_ordenado.begin(), vector_ordenado.end());
          }
       }
-      //unimos el origen y el destino
-      grafo.gotoVertex(resultante.getVertexVector().front());
-      int origen=grafo.getCurrentVertex();
-      grafo.gotoVertex(resultante.getVertexVector().back());
-      int destino=grafo.getCurrentVertex();
+      if(camino_optimo){
+         std::cout << "hola" << '\n';
+         // unimos el origen y el destino
+         grafo.gotoVertex(resultante.getVertexVector().front());
+         int origen=grafo.getCurrentVertex();
+         grafo.gotoVertex(resultante.getVertexVector().back());
+         int destino=grafo.getCurrentVertex();
 
-      resultante.addEdge(resultante.getVertexVector().front(), resultante.getVertexVector().back(), grafo.getMatrix1()[origen][destino]);
-      resultante.setMatrix(resultante.getVertexVector().back().getLabel(), resultante.getVertexVector().front().getLabel(), resultante.getMatrix()[resultante.getVertexVector().front().getLabel()][resultante.getVertexVector().back().getLabel()]);
-      coste+=grafo.getMatrix1()[origen][destino];
+         resultante.addEdge(resultante.getVertexVector().front(), resultante.getVertexVector().back(), grafo.getMatrix1()[origen][destino]);
+         resultante.setMatrix(resultante.getVertexVector().back().getLabel(), resultante.getVertexVector().front().getLabel(), resultante.getMatrix()[resultante.getVertexVector().front().getLabel()][resultante.getVertexVector().back().getLabel()]);
+         candidato_mejor_coste_ultima_conexion=grafo.getMatrix1()[origen][destino];
+      }
 
-      if(coste < coste_total){
-         coste_total=coste;
+      if(candidato_mejor_coste_ultima_conexion < mejor_coste_ultima_conexion){
+         mejor_coste_ultima_conexion=candidato_mejor_coste_ultima_conexion;
+      }
+
+      if(coste + candidato_mejor_coste_ultima_conexion < coste_total + mejor_coste_ultima_conexion){
          optimo=resultante;
+         coste_total=coste;
       }
    }
+   coste_total+=mejor_coste_ultima_conexion;
 
    return optimo;
 }
@@ -216,7 +236,7 @@ void problemaTSP(){
    Graph grafo, optimo;
    int coste_total;
 
-   cargarVertices(grafo, "../src/opcion-C/txt/Andalucia.txt", "../src/opcion-C/txt/matrizAndaluciaCompleta.txt");
+   cargarVertices(grafo, "../src/problemaViajero/txt/Andalucia.txt", "../src/problemaViajero/txt/matrizAndaluciaCompleta.txt");
    optimo = TSP(grafo, coste_total);
    mostrarGrafo(optimo, coste_total);
 }
