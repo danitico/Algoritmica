@@ -10,3 +10,8 @@ add_executable(ciclosHamiltonianos
    ${PROJECT_SOURCE_DIR}problemaViajero/Edge.cpp
    ${PROJECT_SOURCE_DIR}problemaViajero/Vertex.cpp
 )
+
+add_executable(integracion
+   ${PROJECT_SOURCE_DIR}integracion/main.cpp
+   ${PROJECT_SOURCE_DIR}integracion/funciones.cpp
+)
