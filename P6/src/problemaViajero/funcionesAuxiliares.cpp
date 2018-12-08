@@ -80,7 +80,7 @@ void mostrarGrafo(Graph & grafo, int & coste_total){
 Graph TSP(Graph & grafo, int & coste_total){
    Graph optimo;
    int coste;
-   int mejor_coste_ultima_conexion=std::numeric_limits<int>::max(), candidato_mejor_coste_ultima_conexion;
+   int coste_poda=std::numeric_limits<int>::max(), candidato_mejor_coste_ultima_conexion;
    bool camino_optimo;
    coste_total=std::numeric_limits<int>::max();
 
@@ -179,19 +179,34 @@ Graph TSP(Graph & grafo, int & coste_total){
             //añadir el lado entre el vertice anterior y el vectice del conjunto visitados
             //Vamos obteniendo la suma de la ruta del viajante
             coste+=ladoDeseado.getData();
-            if(coste < coste_total){
-               camino_optimo=true;
-            }
-            else{
-               camino_optimo=false;
-               break;
-            }
 
             //Añadimos la conexion entre los dos vertices
             resultante.addEdge(ladoDeseado.first(), ladoDeseado.second(), ladoDeseado.getData());
             resultante.setMatrix(ladoDeseado.second().getLabel(), ladoDeseado.first().getLabel(), resultante.getMatrix()[ladoDeseado.first().getLabel()][ladoDeseado.second().getLabel()]);
             // Ponemos el vertice añadido en el mismo conjunto
             nodos[indice]=1;
+
+            if(coste < coste_poda){
+               camino_optimo=true;
+            }
+            else{
+               // camino_optimo=false;
+               if(nodos==objetivo){
+                  if(coste + calculoUltimaConexion(grafo, resultante) < coste_poda + calculoUltimaConexion(grafo, optimo)){
+                     camino_optimo=true;
+                  }
+                  else{
+                     camino_optimo=false;
+                     std::cout << "PODA1" << '\n';
+                  }
+                  break;
+               }
+               else{
+                  std::cout << "PODA2" << '\n';
+                  camino_optimo=false;
+                  break;
+               }
+            }
 
             //borrar lado del vector ordenado y ordenarlo otra vez
             int etiqueta=0;
@@ -206,27 +221,19 @@ Graph TSP(Graph & grafo, int & coste_total){
             std::sort(vector_ordenado.begin(), vector_ordenado.end());
          }
       }
+
       if(camino_optimo){
          // unimos el origen y el destino
-         grafo.gotoVertex(resultante.getVertexVector().front());
-         int origen=grafo.getCurrentVertex();
-         grafo.gotoVertex(resultante.getVertexVector().back());
-         int destino=grafo.getCurrentVertex();
-
-         resultante.addEdge(resultante.getVertexVector().front(), resultante.getVertexVector().back(), grafo.getMatrix1()[origen][destino]);
-         resultante.setMatrix(resultante.getVertexVector().back().getLabel(), resultante.getVertexVector().front().getLabel(), resultante.getMatrix()[resultante.getVertexVector().front().getLabel()][resultante.getVertexVector().back().getLabel()]);
-         candidato_mejor_coste_ultima_conexion=grafo.getMatrix1()[origen][destino];
+         int ultimo=calculoUltimaConexion(grafo, resultante, true);
+         coste+=ultimo;
 
          if(coste < coste_total){
-            if(candidato_mejor_coste_ultima_conexion < mejor_coste_ultima_conexion ){
-               mejor_coste_ultima_conexion=candidato_mejor_coste_ultima_conexion;
-               optimo=resultante;
-               coste_total=coste;
-            }
+            coste_poda=coste-ultimo;
+            optimo=resultante;
+            coste_total=coste;
          }
       }
    }
-   coste_total+=mejor_coste_ultima_conexion;
 
    return optimo;
 }
@@ -237,4 +244,18 @@ void problemaTSP(){
    cargarVertices(grafo, "../src/problemaViajero/txt/Andalucia.txt", "../src/problemaViajero/txt/matrizAndaluciaCompleta.txt");
    optimo = TSP(grafo, coste_total);
    mostrarGrafo(optimo, coste_total);
+}
+int calculoUltimaConexion(Graph & grafo, Graph & resultante, bool agnadir){
+   grafo.gotoVertex(resultante.getVertexVector().front());
+   int origen=grafo.getCurrentVertex();
+   grafo.gotoVertex(resultante.getVertexVector().back());
+   int destino=grafo.getCurrentVertex();
+
+   if(agnadir){
+      resultante.addEdge(resultante.getVertexVector().front(), resultante.getVertexVector().back(), grafo.getMatrix1()[origen][destino]);
+      resultante.setMatrix(resultante.getVertexVector().back().getLabel(), resultante.getVertexVector().front().getLabel(), resultante.getMatrix()[resultante.getVertexVector().front().getLabel()][resultante.getVertexVector().back().getLabel()]);
+   }
+
+   return grafo.getMatrix1()[origen][destino];
+
 }
