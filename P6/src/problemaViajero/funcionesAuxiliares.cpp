@@ -197,12 +197,10 @@ Graph TSP(Graph & grafo, int & coste_total){
                   }
                   else{
                      camino_optimo=false;
-                     std::cout << "PODA1" << '\n';
                   }
                   break;
                }
                else{
-                  std::cout << "PODA2" << '\n';
                   camino_optimo=false;
                   break;
                }
@@ -241,7 +239,7 @@ void problemaTSP(){
    Graph grafo, optimo;
    int coste_total;
 
-   cargarVertices(grafo, "../src/problemaViajero/txt/Andalucia.txt", "../src/problemaViajero/txt/matrizAndaluciaCompleta.txt");
+   cargarVertices(grafo, "../src/problemaViajero/txt/Andalucia.txt", "../src/problemaViajero/txt/matrizAndalucia.txt");
    optimo = TSP(grafo, coste_total);
    mostrarGrafo(optimo, coste_total);
 }
