@@ -190,7 +190,6 @@ Graph TSP(Graph & grafo, int & coste_total){
                camino_optimo=true;
             }
             else{
-               // camino_optimo=false;
                if(nodos==objetivo){
                   if(coste + calculoUltimaConexion(grafo, resultante) < coste_poda + calculoUltimaConexion(grafo, optimo)){
                      camino_optimo=true;
@@ -239,7 +238,7 @@ void problemaTSP(){
    Graph grafo, optimo;
    int coste_total;
 
-   cargarVertices(grafo, "../src/problemaViajero/txt/Andalucia.txt", "../src/problemaViajero/txt/matrizAndalucia.txt");
+   cargarVertices(grafo, "../src/problemaViajero/txt/Espana.txt", "../src/problemaViajero/txt/matrizEspana.txt");
    optimo = TSP(grafo, coste_total);
    mostrarGrafo(optimo, coste_total);
 }

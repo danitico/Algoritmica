@@ -216,7 +216,7 @@ void problemaTSP(){
    Graph grafo, optimo;
    int coste_total;
 
-   cargarVertices(grafo, "../src/opcion-C/txt/Andalucia.txt", "../src/opcion-C/txt/matrizAndaluciaCompleta.txt");
+   cargarVertices(grafo, "../src/opcion-C/txt/Espana.txt", "../src/opcion-C/txt/matrizEspana.txt");
    optimo = TSP(grafo, coste_total);
    mostrarGrafo(optimo, coste_total);
 }
