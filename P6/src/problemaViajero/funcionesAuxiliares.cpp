@@ -63,7 +63,7 @@ void mostrarGrafo(Graph & grafo, int & coste_total){
 
       std::cout <<std::endl<<BIYELLOW<< "ORIGEN\t\t" << RESET << BICYAN <<"DESTINO\t\t" << RESET << BIBLUE << "DISTANCIA" << RESET <<std::endl;
       for(int j=0; j<grafo.getEdgeVector().size(); j++){
-         std::cout << BIYELLOW << grafo.getEdgeVector()[j].first().getNombre() << RESET;
+         std::cout << BIYELLOW << grafo.getEdgeVector()[j].first().getNombre() << RESET << std::flush;
          std::cout << "\t\t";
          std::cout << BICYAN << grafo.getEdgeVector()[j].second().getNombre() << RESET << std::flush;
          std::cout << "\t\t";
