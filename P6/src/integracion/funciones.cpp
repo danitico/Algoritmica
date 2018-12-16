@@ -2,11 +2,14 @@
 #include <cstdlib>
 #include <iostream>
 #include <cmath>
+int uniforme(int a, int b){
+   return rand()%(b - a + 1) + a;
+}
 double integracionNumerica(int simulaciones, int a, int b){
    double suma=0.0;
    int x=0;
    for(int i=0; i<simulaciones; i++){
-      x=rand()%(b - a + 1) + a;
+      x=uniforme(a, b);
       suma += function(x);
    }
 
@@ -18,7 +21,7 @@ void problemaIntegracion(){
    std::cout << BIBLUE << "Introduzca cuantas simulaciones quiere realizar: " << RESET;
    std::cin >> simulaciones;
 
-   std::cout << BIBLUE << "Introduzca intervalos: " << RESET;
+   std::cout << BIBLUE << "Introduzca intervalos para el método de los trapecios: " << RESET;
    std::cin >> intervalos;
 
    std::cout << BIBLUE << "Introduzca el límite inferior: " << RESET;
